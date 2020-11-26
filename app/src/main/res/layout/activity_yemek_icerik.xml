@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bf000000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="104dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="218dp"
+            app:srcCompat="@drawable/magnolia"
+            tools:srcCompat="@drawable/magnolia" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="328dp">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingStart="5dp"
+                android:text="Tencereye şeker, nişasta, un, toz vanilya ve yumurtayı koyuyoruz. Yavaşça sütü ekliyoruz ve çırpma teli ile iyice çırpıyoruz. Ocağa koyup kısık ateşte topaklanmamasına dikkat ederek karıştırıyoruz. Kaynamaya başlayıp muhallebi kıvamına geldiğinde ocağın altını kapatıyoruz ve soğumaya bırakıyoruz. Muhallebi soğurken bisküvileri rondodan geçiriyoruz büyük parçaların kalmamasına özen gösteriyoruz. Muhallebi soğuduktan sonra içine bir paket kremamızı da ilave çırpma teli ile çırpıyoruz.Küçük kuplara eşit şekilde dağıtıyoruz. İlk olarak bisküvi sonra çilek ya da muz sonra muhallebi, sonra tekrar bisküvi çilek/muz ve tekrar muhallebi ve en son üste bisküvi serpip istediğimiz gibi süslüyoruz. Hem kendiniz hem de sevdikleriniz için hafif ve lezzetli bir tatlı arıyorsanız magnolianın tarifi işte bu kadar basit!"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/button25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8E24AA"
+            android:onClick="addMalzeme"
+            android:text="Malzemeleri ekle"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

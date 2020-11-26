@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1069666879953",
+    "firebase_url": "https://mylist-99a65.firebaseio.com",
+    "project_id": "mylist-99a65",
+    "storage_bucket": "mylist-99a65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069666879953:android:322678ad99d94c2efd78f0",
+        "android_client_info": {
+          "package_name": "com.egeuzma.proje"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069666879953-n09qgplvsutu0nq0at3d52diisudc58e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcTRSDMTIiTdNHdpqkcTe-m0bG2D5COHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069666879953-n09qgplvsutu0nq0at3d52diisudc58e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
