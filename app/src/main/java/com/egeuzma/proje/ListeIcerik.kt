@@ -46,5 +46,6 @@ class ListeIcerik : AppCompatActivity() {
     fun addProduct(view: View){
         val intent = Intent(applicationContext,UrunEkleme::class.java)
         startActivity(intent)
+
     }
 }
