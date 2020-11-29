@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_liste_icerik.*
 class ListeIcerik : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
     var productName : ArrayList<String> = ArrayList()
-
+    var product : ArrayList<String> = ArrayList()
     var adapter : MalzemeAdapter?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +32,12 @@ class ListeIcerik : AppCompatActivity() {
         db.collection("Listeler").whereEqualTo("isim",selectedList).get().addOnSuccessListener { documents ->
             productName.clear()
             for (document in documents){
-                val product = document.get("malzemeler") as ArrayList<String>
-                for (products in product){
-                    productName.add(products)
-                    // println(products)
+                if(product.isEmpty()){
+                    product = document.get("malzemeler") as ArrayList<String>
+                    for (products in product){
+                        productName.add(products)
+                        // println(products)
+                    }
                 }
                 adapter!!.notifyDataSetChanged()
             }

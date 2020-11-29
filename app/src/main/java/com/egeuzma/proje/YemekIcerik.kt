@@ -31,11 +31,12 @@ class YemekIcerik : AppCompatActivity() {
     }
     fun addMalzeme(view: View){
         db.collection("YemekTarifleri").whereEqualTo("isim",selectedTarif).get().addOnSuccessListener { documents ->
+            malzemeler.clear()
             for (document in documents){
-                malzemeler = document.get("malzemeler") as ArrayList<String>
+                    malzemeler = document.get("malzemeler") as ArrayList<String>
             }
             val listmap = hashMapOf<String,Any>()
-            val isim = selectedTarif!! + " Listesi"
+            val isim = selectedTarif!! +" Listesi "+(documents.size()+1)
             listmap.put("isim",isim)
             listmap.put("malzemeler",malzemeler)
             db.collection("Listeler").add(listmap).addOnCompleteListener { task ->

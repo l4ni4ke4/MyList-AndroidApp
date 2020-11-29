@@ -54,9 +54,9 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(applicationContext,KaloriHesaplayici::class.java)
         startActivity(intent)
     }
-    fun createNewList(view: View){
-        val intent = Intent(applicationContext,ListeIcerik::class.java)
-        startActivity(intent)
-    }
+   // fun createNewList(view: View){
+     // val intent = Intent(applicationContext,ListeIcerik::class.java)
+       //startActivity(intent)
+   //}
 
 }
