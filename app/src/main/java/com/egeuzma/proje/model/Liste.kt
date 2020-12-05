@@ -1,6 +1,8 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.model
 
-class Liste(name : String , malzemeler : ArrayList<String>) {
+import java.io.Serializable
+
+class Liste(name : String , malzemeler : ArrayList<String>) : Serializable{
      var isim :String ? = name
          private set
          get

@@ -1,4 +1,4 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,13 +6,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.egeuzma.proje.R
+import com.egeuzma.proje.TarifAdapter
+import com.egeuzma.proje.model.YemekTarif
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_yemek_tarifleri.*
 
 class YemekTarifleri : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
-    var tarifName : ArrayList<String> = ArrayList()
+    //var tarifName : ArrayList<String> = ArrayList()
+    var tarifler : ArrayList<YemekTarif> = ArrayList()
     var adapter : TarifAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +25,7 @@ class YemekTarifleri : AppCompatActivity() {
 
         var layoutManager = LinearLayoutManager(this)
         recyclerView2.layoutManager = layoutManager
-        adapter = TarifAdapter(tarifName)
+        adapter = TarifAdapter(tarifler)
         recyclerView2.adapter = adapter
 
 
@@ -34,11 +37,20 @@ class YemekTarifleri : AppCompatActivity() {
           }else{
               if(snapshot!=null){
                   if(!snapshot.isEmpty){
-                      tarifName.clear()
+                      tarifler.clear()
+                      //tarifName.clear()
                       val documents = snapshot.documents
                       for (document in documents){
                           val isim = document.get("isim") as String
-                          tarifName.add(isim)
+                          val malzeme = document.get("malzemeler") as ArrayList<String>
+                          val recept = document.get("tarif") as String
+                          var myTarif = YemekTarif(
+                              isim,
+                              malzeme,
+                              recept
+                          )
+                          //tarifName.add(isim)
+                          tarifler.add(myTarif)
                           adapter!!.notifyDataSetChanged()
                       }
                   }
@@ -47,7 +59,8 @@ class YemekTarifleri : AppCompatActivity() {
       }
     }
     fun goToRecept(view: View){
-        val intent = Intent(applicationContext,YemekIcerik::class.java)
+        val intent = Intent(applicationContext,
+            YemekIcerik::class.java)
         startActivity(intent)
     }
 }

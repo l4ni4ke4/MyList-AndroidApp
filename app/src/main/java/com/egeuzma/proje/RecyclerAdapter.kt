@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.egeuzma.proje.model.Liste
+import com.egeuzma.proje.view.ListeIcerik
 
-class RecyclerAdapter(private val listname :ArrayList<String>): RecyclerView.Adapter<RecyclerAdapter.PostHolder>(){
+class RecyclerAdapter(private val listname :ArrayList<Liste>): RecyclerView.Adapter<RecyclerAdapter.PostHolder>(){
 
 
 
@@ -31,13 +33,13 @@ class RecyclerAdapter(private val listname :ArrayList<String>): RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
-        holder.recyclerText?.text =listname[position]
+        holder.recyclerText?.text =listname[position].isim
         holder.itemView.setOnClickListener {
            // println("tıklandı")
            // println(listname[position])
             val context=holder.recyclerText?.context
-            val intent = Intent( context,ListeIcerik::class.java)
-            intent.putExtra("isim",listname[position])
+            val intent = Intent( context, ListeIcerik::class.java)
+            intent.putExtra("isim",listname[position].isim)
             context?.startActivity(intent)
         }
 

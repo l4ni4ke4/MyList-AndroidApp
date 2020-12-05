@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.egeuzma.proje.model.YemekTarif
+import com.egeuzma.proje.view.YemekIcerik
 
-class TarifAdapter (private val tarifname :ArrayList<String>): RecyclerView.Adapter<TarifAdapter.TarifHolder>() {
+class TarifAdapter (private val tarifname :ArrayList<YemekTarif>): RecyclerView.Adapter<TarifAdapter.TarifHolder>() {
 
   class TarifHolder(view : View) : RecyclerView.ViewHolder(view){
       var recyclerText : TextView? = null
@@ -29,12 +31,12 @@ class TarifAdapter (private val tarifname :ArrayList<String>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: TarifAdapter.TarifHolder, position: Int) {
-        holder.recyclerText?.text=tarifname[position]
+        holder.recyclerText?.text=tarifname[position].isim
         holder.itemView.setOnClickListener {
             // println("tıklandı")
             // println(listname[position])
             val context=holder.recyclerText?.context
-            val intent = Intent( context,YemekIcerik::class.java)
+            val intent = Intent( context, YemekIcerik::class.java)
             intent.putExtra("isim",tarifname[position])
             context?.startActivity(intent)
         }

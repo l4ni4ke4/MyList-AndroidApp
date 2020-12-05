@@ -1,11 +1,12 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.egeuzma.proje.MalzemeAdapter
+import com.egeuzma.proje.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_liste_icerik.*
 
@@ -22,6 +23,7 @@ class ListeIcerik : AppCompatActivity() {
         val selectedList=intent.getStringExtra("isim")
         textView2.text = selectedList
         getFromFirebase(selectedList!!)
+
         var layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         adapter = MalzemeAdapter(productName)
@@ -44,8 +46,7 @@ class ListeIcerik : AppCompatActivity() {
         }
     }
     fun addProduct(view: View){
-        val intent = Intent(applicationContext,UrunEkleme::class.java)
+        val intent = Intent(applicationContext, UrunEkleme::class.java)
         startActivity(intent)
-
     }
 }

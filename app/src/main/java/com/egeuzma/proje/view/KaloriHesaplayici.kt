@@ -1,7 +1,8 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.egeuzma.proje.R
 
 class KaloriHesaplayici : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

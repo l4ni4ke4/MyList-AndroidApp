@@ -1,11 +1,12 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.egeuzma.proje.R
 
-class UrunEkleme : AppCompatActivity() {
+class UrunDetayi : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_urun_ekleme)
+        setContentView(R.layout.activity_urun_detayi)
     }
 }
