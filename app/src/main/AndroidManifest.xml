@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.KaloriHesaplayici"></activity>
-        <activity android:name=".view.YemekIcerik" />
-        <activity android:name=".view.YemekTarifleri" />
-        <activity android:name=".view.UrunDetayi" />
-        <activity android:name=".view.UrunEkleme" />
-        <activity android:name=".view.ListeIcerik" />
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".Controller.KaloriHesaplayici"></activity>
+        <activity android:name=".Controller.YemekIcerik" />
+        <activity android:name=".Controller.YemekTarifleri" />
+        <activity android:name=".Controller.UrunDetayi" />
+        <activity android:name=".Controller.UrunEkleme" />
+        <activity android:name=".Controller.ListeIcerik" />
+        <activity android:name=".Controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

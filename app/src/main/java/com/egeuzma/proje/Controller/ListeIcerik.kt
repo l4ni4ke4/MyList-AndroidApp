@@ -1,4 +1,4 @@
-package com.egeuzma.proje.view
+package com.egeuzma.proje.Controller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +20,19 @@ class ListeIcerik : AppCompatActivity() {
         setContentView(R.layout.activity_liste_icerik)
         db = FirebaseFirestore.getInstance()
         val intent = intent
-        val selectedList=intent.getStringExtra("isim")
-        textView2.text = selectedList
-        getFromFirebase(selectedList!!)
+        val info= intent.getStringExtra("info")
+
+        if(info == "new"){
+
+            textView2.text="Yeni Liste"
+        }else{
+            val selectedList=intent.getStringExtra("isim")
+            textView2.text = selectedList
+            getFromFirebase(selectedList!!)
+        }
+
+
+
 
         var layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager

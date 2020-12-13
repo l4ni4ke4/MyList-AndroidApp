@@ -1,4 +1,4 @@
-package com.egeuzma.proje.view
+package com.egeuzma.proje.Controller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             if(exception != null){
                 Toast.makeText(applicationContext,exception.localizedMessage.toString(), Toast.LENGTH_LONG).show()
             }else{
+                println("Database bağlantısı sağlandı.")
                 if(snapshot!=null){
                     if (!snapshot.isEmpty){
                        // listName.clear()
@@ -66,9 +67,10 @@ class MainActivity : AppCompatActivity() {
             KaloriHesaplayici::class.java)
         startActivity(intent)
     }
-   // fun createNewList(view: View){
-     // val intent = Intent(applicationContext,ListeIcerik::class.java)
-       //startActivity(intent)
-   //}
+   fun createNewList(view: View){
+     val intent = Intent(applicationContext,ListeIcerik::class.java)
+       intent.putExtra("info","new")
+       startActivity(intent)
+   }
 
 }

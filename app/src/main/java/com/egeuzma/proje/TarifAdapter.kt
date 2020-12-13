@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.model.YemekTarif
-import com.egeuzma.proje.view.YemekIcerik
+import com.egeuzma.proje.Controller.YemekIcerik
 
 class TarifAdapter (private val tarifname :ArrayList<YemekTarif>): RecyclerView.Adapter<TarifAdapter.TarifHolder>() {
 

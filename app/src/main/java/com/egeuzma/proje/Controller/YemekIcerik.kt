@@ -1,4 +1,4 @@
-package com.egeuzma.proje.view
+package com.egeuzma.proje.Controller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -40,7 +40,7 @@ class YemekIcerik : AppCompatActivity() {
                     malzemeler = document.get("malzemeler") as ArrayList<String>
             }
             val listmap = hashMapOf<String,Any>()
-            val isim = selectedTarif!! +" Listesi "+(documents.size()+1)
+            val isim = selectedTarif!! +" Listesi "+(documents.size())
             listmap.put("isim",isim)
             listmap.put("malzemeler",malzemeler)
             addListToDatabase(listmap)

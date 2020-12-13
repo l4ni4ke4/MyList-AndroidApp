@@ -1,4 +1,4 @@
-package com.egeuzma.proje.view
+package com.egeuzma.proje.Controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

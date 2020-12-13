@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.model.Liste
-import com.egeuzma.proje.view.ListeIcerik
+import com.egeuzma.proje.Controller.ListeIcerik
 
 class RecyclerAdapter(private val listname :ArrayList<Liste>): RecyclerView.Adapter<RecyclerAdapter.PostHolder>(){
 
@@ -39,6 +39,7 @@ class RecyclerAdapter(private val listname :ArrayList<Liste>): RecyclerView.Adap
            // println(listname[position])
             val context=holder.recyclerText?.context
             val intent = Intent( context, ListeIcerik::class.java)
+            intent.putExtra("info","old")
             intent.putExtra("isim",listname[position].isim)
             context?.startActivity(intent)
         }
