@@ -1,6 +1,6 @@
 package com.egeuzma.proje.model
 
-class Product(name : String , unitType : String,unitCalorie : Float,servingName :String,servingSize :String,category :String) {
+class Product(name : String , unitType : String,unitCalorie : Float,servingName :String,servingSize :Float,category :String) {
     var isim :String ? = name
         private set
         get
@@ -13,7 +13,7 @@ class Product(name : String , unitType : String,unitCalorie : Float,servingName 
     var serving :String ? = servingName
         private set
         get
-    var servingsize :String ? = servingSize
+    var servingsize :Float ? = servingSize
         private set
         get
     var kategori :String ? = category
