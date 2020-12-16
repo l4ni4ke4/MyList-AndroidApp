@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/item1" android:title="Alkollü İçecekler" ></item>
+    <item android:id="@+id/item13" android:title="Tüm Ürünler"></item>
+    <item android:id="@+id/item1" android:title="Alkollü İçkiler ve İçecekler" ></item>
     <item android:id="@+id/item2" android:title="Alkolsüz İçecekler"></item>
     <item android:id="@+id/item9" android:title="Çerezler"></item>
     <item android:id="@+id/item12" android:title="Dondurma ve Dondurulmuş Tatlılar"></item>

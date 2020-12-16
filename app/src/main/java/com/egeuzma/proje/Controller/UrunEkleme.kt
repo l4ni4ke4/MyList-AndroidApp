@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.R
@@ -28,7 +29,7 @@ class UrunEkleme : AppCompatActivity() {
     var products :ArrayList<String> = ArrayList()
     var products1 :ArrayList<String> = ArrayList()
     var adapter : UrunAdapter?=null
-
+    var productskategori :ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_urun_ekleme)
@@ -42,7 +43,6 @@ class UrunEkleme : AppCompatActivity() {
         adapter = UrunAdapter(productsName)
         recyclerViewProduct.adapter = adapter
         recyclerViewProduct.setOnTouchListener(object : View.OnTouchListener {
-
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                var imm =  getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(v!!.getWindowToken(), 0);
@@ -85,7 +85,41 @@ class UrunEkleme : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+       if(item.title.toString()=="Tüm Ürünler"){
+           textView6.visibility=View.INVISIBLE
+           searchView.visibility=View.VISIBLE
+           getProductData()
+       }else{
+           textView6.visibility=View.VISIBLE
+           textView6.text=item.title
+           searchView.visibility=View.INVISIBLE
+           getCategory(item.title.toString())
+       }
         return super.onOptionsItemSelected(item)
+    }
+    fun getCategory(kategori:String) {
+        db.collection("Urunler").whereEqualTo("Category", kategori)
+            .addSnapshotListener { snapshot, exception ->
+                if (exception != null) {
+                    Toast.makeText(
+                        applicationContext,
+                        exception.localizedMessage.toString(),
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    if (snapshot != null) {
+                        if (!snapshot.isEmpty) {
+                            productsName.clear()
+                            val documents = snapshot.documents
+                            for (document in documents) {
+                                val isim = document.get("Name") as String
+                                productsName.add(isim)
+                                adapter!!.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                }
+            }
     }
     fun getProductData(){
         db.collection("Urunler").addSnapshotListener { snapshot, exception ->
@@ -103,7 +137,7 @@ class UrunEkleme : AppCompatActivity() {
                             productsName.add(isim)
                             products.add(isim)
                             products1.add(isim)
-                            adapter!!.notifyDataSetChanged()
+                            recyclerViewProduct.adapter!!.notifyDataSetChanged()
                         }
                     }
                 }

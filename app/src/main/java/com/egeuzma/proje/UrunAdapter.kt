@@ -29,27 +29,5 @@ class UrunAdapter (private val productname :ArrayList<String>): RecyclerView.Ada
     override fun onBindViewHolder(holder:UrunHolder, position: Int) {
         holder.recyclerText?.text=productname[position]
     }
-    fun filter(text: String) {
-        var text = text
-        //println(productname)
-        var itemsCopy = productname.clone() as ArrayList<String>
-        productname.clear()
-        //println(itemsCopy)
-        if (text.isEmpty()) {
-            println("filter1")
-            productname.addAll(itemsCopy)
-        } else {
-            println("filter2")
-            text = text.toLowerCase()
-            for (item in itemsCopy) {
-                println("item : "+ item)
-                println("text :"+ text)
-                if (item==text) {
-                    println("filter3")
-                    productname.add(item)
-                }
-            }
-        }
-        notifyDataSetChanged()
-    }
+
 }
