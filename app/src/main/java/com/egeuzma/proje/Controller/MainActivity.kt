@@ -4,16 +4,23 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.egeuzma.proje.R
 import com.egeuzma.proje.RecyclerAdapter
 import com.egeuzma.proje.model.Liste
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_liste_icerik.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.change_liste_ismi.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
+    var malzeme : ArrayList<String> = ArrayList()
     var listName : ArrayList<String> = ArrayList()
     var lists :ArrayList<Liste> = ArrayList()
     var adapter : RecyclerAdapter?=null
@@ -38,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 println("Database bağlantısı sağlandı.")
                 if(snapshot!=null){
                     if (!snapshot.isEmpty){
-                       // listName.clear()
+                       listName.clear()
                         lists.clear()
                         val documents = snapshot.documents
                         for (document in documents){
@@ -47,9 +54,7 @@ class MainActivity : AppCompatActivity() {
                             var myList =
                                 Liste(isim, malzeme)
                             lists.add(myList)
-                            //val isim = document.get("isim") as String
-                            // println(isim)
-                            //listName.add(isim)
+                            listName.add(isim)
                             adapter!!.notifyDataSetChanged()
                         }
                     }
@@ -68,9 +73,51 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
    fun createNewList(view: View){
-     val intent = Intent(applicationContext,ListeIcerik::class.java)
-       intent.putExtra("info","new")
-       startActivity(intent)
+
+       val alert = AlertDialog.Builder(this)
+       val view = layoutInflater.inflate(R.layout.change_liste_ismi,null)
+       val textview = view.findViewById<TextView>(R.id.textView5)
+       val but = view.findViewById<Button>(R.id.button7)
+       val edittext = view.findViewById<EditText>(R.id.yeniListe)
+       alert.setView(view)
+       val dialog = alert.create()
+       dialog.show()
+       but.setOnClickListener(object : View.OnClickListener{
+           override fun onClick(v: View?) {
+               val map = HashMap<String,Any>()
+               map.put("isim",edittext.text.toString())
+               map.put("malzemeler",malzeme)
+               println(edittext.text)
+               //db.collection("Listeler").document(edittext.text.toString()).set(map)
+               if(listName.contains(edittext.text.toString())){
+                   textview.text="Bu isimli liste zaten var. Başka isim giriniz."
+               }else{
+                   db.collection("Listeler").document(edittext.text.toString()).set(map)
+                   val intent = Intent(applicationContext,ListeIcerik::class.java)
+                   intent.putExtra("info","new")
+                   intent.putExtra("isim",edittext.text.toString())
+                   startActivity(intent)
+                   dialog.cancel()
+               }
+
+
+
+
+
+
+              /* db.collection("Listeler").add(map).addOnCompleteListener { task ->
+                   if(task.isComplete&&task.isSuccessful){
+
+
+
+                   }
+               }.addOnFailureListener { exception ->
+                   Toast.makeText(applicationContext,exception.localizedMessage.toString(),Toast.LENGTH_LONG).show()
+               }*/
+           }
+
+       })
+
    }
 
 }

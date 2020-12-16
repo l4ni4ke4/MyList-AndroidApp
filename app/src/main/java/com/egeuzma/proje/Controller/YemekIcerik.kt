@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.egeuzma.proje.R
+import com.egeuzma.proje.model.Database
 import com.egeuzma.proje.model.YemekTarif
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_yemek_icerik.*
@@ -40,10 +41,11 @@ class YemekIcerik : AppCompatActivity() {
                     malzemeler = document.get("malzemeler") as ArrayList<String>
             }
             val listmap = hashMapOf<String,Any>()
-            val isim = selectedTarif!! +" Listesi "+(documents.size())
+            val isim=selectedTarif + " Listesi"
             listmap.put("isim",isim)
             listmap.put("malzemeler",malzemeler)
             addListToDatabase(listmap)
+
         }
     }
     fun  addListToDatabase (listmap : HashMap<String,Any>){

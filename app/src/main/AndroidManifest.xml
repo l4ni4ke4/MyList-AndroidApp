@@ -13,9 +13,12 @@
         <activity android:name=".Controller.YemekIcerik" />
         <activity android:name=".Controller.YemekTarifleri" />
         <activity android:name=".Controller.UrunDetayi" />
-        <activity android:name=".Controller.UrunEkleme" />
-        <activity android:name=".Controller.ListeIcerik" />
-        <activity android:name=".Controller.MainActivity">
+        <activity android:name=".Controller.UrunEkleme"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
+        <activity android:name=".Controller.ListeIcerik"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
+        <activity android:name=".Controller.MainActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

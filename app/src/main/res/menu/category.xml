@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/item1" android:title="Alkollü İçecekler" ></item>
+    <item android:id="@+id/item2" android:title="Alkolsüz İçecekler"></item>
+    <item android:id="@+id/item9" android:title="Çerezler"></item>
+    <item android:id="@+id/item12" android:title="Dondurma ve Dondurulmuş Tatlılar"></item>
+    <item android:id="@+id/item10" android:title="Ekmek ve Pasta Malzemeleri"></item>
+    <item android:id="@+id/item4" android:title="Et ve Balık Ürünler"></item>
+    <item android:id="@+id/item3" android:title="Kuru Gıda"></item>
+    <item android:id="@+id/item6" android:title="Meyve ve Sebzeler"></item>
+    <item android:id="@+id/item7" android:title="Ot ve Baharatlar"></item>
+    <item android:id="@+id/item11" android:title="Sıvı ve Katı Yağlar"></item>
+    <item android:id="@+id/item5" android:title="Süt ve Süt Ürünleri"></item>
+    <item android:id="@+id/item8" android:title="Temizlik Ürünleri"></item>
+</menu>
