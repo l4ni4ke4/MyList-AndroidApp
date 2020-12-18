@@ -52,7 +52,6 @@ class YemekIcerik : AppCompatActivity() {
             listmap.put("isim",isim)
             listmap.put("Urunler",products)
             addListToDatabase(listmap,isim)
-
         }
     }
     fun  addListToDatabase (listmap : HashMap<String,Any>,isim:String){
