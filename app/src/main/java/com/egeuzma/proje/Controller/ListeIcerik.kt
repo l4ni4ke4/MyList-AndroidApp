@@ -26,8 +26,11 @@ class ListeIcerik : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
     var productName : ArrayList<String> = ArrayList()
     var product : ArrayList<String> = ArrayList()
+    var deneme: ArrayList<HashMap<String,Any>> = ArrayList()
     var adapter : MalzemeAdapter?=null
     var selectedList:String? = null
+    var productNumber : ArrayList<Long> = ArrayList()
+    var productNote : ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_liste_icerik)
@@ -47,7 +50,7 @@ class ListeIcerik : AppCompatActivity() {
 
         var layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        adapter = MalzemeAdapter(productName)
+        adapter = MalzemeAdapter(productName,productNumber,productNote)
         recyclerView.adapter = adapter
         recyclerView.setOnTouchListener(object : View.OnTouchListener {
 
@@ -73,14 +76,23 @@ class ListeIcerik : AppCompatActivity() {
                     if (snapshot != null) {
                         if (!snapshot.isEmpty) {
                             productName.clear()
+                            productNote.clear()
+                            productNumber.clear()
                             val documents = snapshot.documents
                             for (document in documents) {
-                                if (product.isEmpty()) {
-                                    product = document.get("malzemeler") as ArrayList<String>
-                                    for (products in product) {
-                                        productName.add(products)
-                                        // println(products)
+                                if (deneme.isEmpty()) {
+                                   // product = document.get("malzemeler") as ArrayList<String>
+                                    deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
+                                    for (x in deneme){
+                                        productName.add(x.getValue("UrunAdi") as String)
+                                        //println(x.getValue("UrunAdeti")as Long)
+                                        productNumber.add(x.getValue("UrunAdeti")as Long)
+                                        productNote.add(x.getValue("UrunNotu")as String)
                                     }
+                                   // for (products in product) {
+                                    //    productName.add(products)
+                                        // println(products)
+                                   // }
                                 }
                                 adapter!!.notifyDataSetChanged()
                             }

@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.change_liste_ismi.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
-    var malzeme : ArrayList<String> = ArrayList()
+    var malzeme : ArrayList<HashMap<String,Any>> = ArrayList()
     var listName : ArrayList<String> = ArrayList()
     var lists :ArrayList<Liste> = ArrayList()
     var adapter : RecyclerAdapter?=null
@@ -50,9 +50,8 @@ class MainActivity : AppCompatActivity() {
                         val documents = snapshot.documents
                         for (document in documents){
                             val isim = document.get("isim") as String
-                            val malzeme = document.get("malzemeler") as ArrayList<String>
-                            var myList =
-                                Liste(isim, malzeme)
+                            val malzeme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
+                            var myList = Liste(isim, malzeme)
                             lists.add(myList)
                             listName.add(isim)
                             adapter!!.notifyDataSetChanged()
@@ -86,7 +85,7 @@ class MainActivity : AppCompatActivity() {
            override fun onClick(v: View?) {
                val map = HashMap<String,Any>()
                map.put("isim",edittext.text.toString())
-               map.put("malzemeler",malzeme)
+               map.put("Urunler",malzeme)
                println(edittext.text)
                //db.collection("Listeler").document(edittext.text.toString()).set(map)
                if(listName.contains(edittext.text.toString())){
@@ -99,21 +98,6 @@ class MainActivity : AppCompatActivity() {
                    startActivity(intent)
                    dialog.cancel()
                }
-
-
-
-
-
-
-              /* db.collection("Listeler").add(map).addOnCompleteListener { task ->
-                   if(task.isComplete&&task.isSuccessful){
-
-
-
-                   }
-               }.addOnFailureListener { exception ->
-                   Toast.makeText(applicationContext,exception.localizedMessage.toString(),Toast.LENGTH_LONG).show()
-               }*/
            }
 
        })

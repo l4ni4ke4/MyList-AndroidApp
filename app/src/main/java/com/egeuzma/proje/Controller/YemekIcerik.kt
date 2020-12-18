@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_yemek_icerik.*
 class YemekIcerik : AppCompatActivity() {
     private  lateinit var db : FirebaseFirestore
     var selectedTarif : String? =null
-
+    var products: ArrayList<HashMap<String,Any>> = ArrayList()
     var malzemeler : ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,16 +40,27 @@ class YemekIcerik : AppCompatActivity() {
             for (document in documents){
                     malzemeler = document.get("malzemeler") as ArrayList<String>
             }
+            for(malzeme in malzemeler){
+                val map = HashMap<String,Any>()
+                map.put("UrunAdi",malzeme)
+                map.put("UrunAdeti",0)
+                map.put("UrunNotu","")
+                products.add(map)
+            }
             val listmap = hashMapOf<String,Any>()
             val isim=selectedTarif + " Listesi"
             listmap.put("isim",isim)
-            listmap.put("malzemeler",malzemeler)
-            addListToDatabase(listmap)
+            listmap.put("Urunler",products)
+            addListToDatabase(listmap,isim)
 
         }
     }
-    fun  addListToDatabase (listmap : HashMap<String,Any>){
-        db.collection("Listeler").add(listmap).addOnCompleteListener { task ->
+    fun  addListToDatabase (listmap : HashMap<String,Any>,isim:String){
+        db.collection("Listeler").document(isim).set(listmap)
+        val intent = Intent(applicationContext,MainActivity::class.java)
+        startActivity(intent)
+        finish()
+      /*  db.collection("Listeler").add(listmap).addOnCompleteListener { task ->
             if(task.isComplete&&task.isSuccessful){
                 val intent = Intent(applicationContext,
                     MainActivity::class.java)
@@ -58,6 +69,6 @@ class YemekIcerik : AppCompatActivity() {
             }
         }.addOnFailureListener { exception ->
             Toast.makeText(applicationContext,exception.localizedMessage.toString(),Toast.LENGTH_LONG).show()
-        }
+        }*/
     }
 }
