@@ -13,6 +13,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="#272626"
+        android:onClick="addNote"
         android:paddingStart="10dp"
         android:text="Bitter çikolata ve sütlü çikolata"
         android:textColor="#FFFFFF"
@@ -38,6 +39,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:background="#272626"
+        android:onClick="addAdet"
         android:paddingStart="10dp"
         android:text="2"
         android:textColor="#FFFFFF"
@@ -83,15 +85,26 @@
 
     <Button
         android:id="@+id/button22"
-        android:layout_width="401dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="73dp"
+        android:layout_width="204dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="32dp"
         android:backgroundTint="#FF0000"
+        android:onClick="deleteProduct"
         android:text="Ürünü Sil"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="204dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#4BDA13"
+        android:onClick="kaydet"
+        android:text="Kaydet"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

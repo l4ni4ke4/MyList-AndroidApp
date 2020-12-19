@@ -2,14 +2,15 @@ package com.egeuzma.proje.Controller
 
 import android.R.attr
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,13 +35,15 @@ class UrunEkleme : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_urun_ekleme)
         db = FirebaseFirestore.getInstance()
+        val intent = intent
+        val isim= intent.getStringExtra("isim")
         getProductData()
         var layoutManager = LinearLayoutManager(this)
 
         recyclerViewProduct.layoutManager = layoutManager
         // adapter = RecyclerAdapter(listName)
 
-        adapter = UrunAdapter(productsName)
+        adapter = UrunAdapter(productsName,isim!!)
         recyclerViewProduct.adapter = adapter
         recyclerViewProduct.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -50,6 +53,7 @@ class UrunEkleme : AppCompatActivity() {
                 return false;
             }
         });
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                     return true

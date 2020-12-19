@@ -12,7 +12,7 @@ import com.egeuzma.proje.Controller.ListeIcerik
 import com.egeuzma.proje.Controller.UrunDetayi
 import kotlinx.android.synthetic.main.recycler_view_row.view.*
 
-class MalzemeAdapter (private val productName : ArrayList<String>,private val productNumber : ArrayList<Long>,private val productNote : ArrayList<String>):RecyclerView.Adapter<MalzemeAdapter.MalzemeHolder>(){
+class MalzemeAdapter (private val productName : ArrayList<String>,private val productNumber : ArrayList<String>,private val productNote : ArrayList<String>,private val liste:String):RecyclerView.Adapter<MalzemeAdapter.MalzemeHolder>(){
     class MalzemeHolder(view: View):RecyclerView.ViewHolder(view){
         var recyclerText : TextView? = null
 
@@ -48,7 +48,9 @@ class MalzemeAdapter (private val productName : ArrayList<String>,private val pr
             intent.putExtra("isim",productName[position])
             intent.putExtra("not",productNote[position])
             intent.putExtra("adet",productNumber[position])
+            intent.putExtra("liste",liste)
             context?.startActivity(intent)
+
             true
         }
     }

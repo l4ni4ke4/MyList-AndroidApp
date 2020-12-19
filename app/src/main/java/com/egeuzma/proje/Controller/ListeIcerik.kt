@@ -29,7 +29,7 @@ class ListeIcerik : AppCompatActivity() {
     var deneme: ArrayList<HashMap<String,Any>> = ArrayList()
     var adapter : MalzemeAdapter?=null
     var selectedList:String? = null
-    var productNumber : ArrayList<Long> = ArrayList()
+    var productNumber : ArrayList<String> = ArrayList()
     var productNote : ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,19 +38,15 @@ class ListeIcerik : AppCompatActivity() {
         val intent = intent
         val info= intent.getStringExtra("info")
 
-        if(info == "new"){
+        if(info == "new" || info == "old"){
             selectedList=intent.getStringExtra("isim")
             textView2.text=selectedList
-            getFromFirebase(selectedList!!)
-        }else{
-            selectedList=intent.getStringExtra("isim")
-            textView2.text = selectedList
             getFromFirebase(selectedList!!)
         }
 
         var layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        adapter = MalzemeAdapter(productName,productNumber,productNote)
+        adapter = MalzemeAdapter(productName,productNumber,productNote,selectedList!!)
         recyclerView.adapter = adapter
         recyclerView.setOnTouchListener(object : View.OnTouchListener {
 
@@ -85,14 +81,9 @@ class ListeIcerik : AppCompatActivity() {
                                     deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
                                     for (x in deneme){
                                         productName.add(x.getValue("UrunAdi") as String)
-                                        //println(x.getValue("UrunAdeti")as Long)
-                                        productNumber.add(x.getValue("UrunAdeti")as Long)
+                                        productNumber.add(x.getValue("UrunAdeti")as String)
                                         productNote.add(x.getValue("UrunNotu")as String)
                                     }
-                                   // for (products in product) {
-                                    //    productName.add(products)
-                                        // println(products)
-                                   // }
                                 }
                                 adapter!!.notifyDataSetChanged()
                             }
@@ -104,6 +95,7 @@ class ListeIcerik : AppCompatActivity() {
     }
     fun addProduct(view: View){
         val intent = Intent(applicationContext, UrunEkleme::class.java)
+        intent.putExtra("isim",selectedList)
         startActivity(intent)
     }
     fun deleteList(view: View){
@@ -114,4 +106,5 @@ class ListeIcerik : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 }

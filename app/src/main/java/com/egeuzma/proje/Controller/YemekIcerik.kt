@@ -43,7 +43,7 @@ class YemekIcerik : AppCompatActivity() {
             for(malzeme in malzemeler){
                 val map = HashMap<String,Any>()
                 map.put("UrunAdi",malzeme)
-                map.put("UrunAdeti",0)
+                map.put("UrunAdeti","0")
                 map.put("UrunNotu","")
                 products.add(map)
             }
@@ -59,15 +59,5 @@ class YemekIcerik : AppCompatActivity() {
         val intent = Intent(applicationContext,MainActivity::class.java)
         startActivity(intent)
         finish()
-      /*  db.collection("Listeler").add(listmap).addOnCompleteListener { task ->
-            if(task.isComplete&&task.isSuccessful){
-                val intent = Intent(applicationContext,
-                    MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }.addOnFailureListener { exception ->
-            Toast.makeText(applicationContext,exception.localizedMessage.toString(),Toast.LENGTH_LONG).show()
-        }*/
     }
 }

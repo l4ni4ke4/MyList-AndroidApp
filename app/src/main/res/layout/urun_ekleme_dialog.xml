@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#77615151"
+    android:orientation="vertical"
+    android:paddingLeft="25dp">
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="296dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="10dp"
+        android:text="Adet / Gram "
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/yeniListe"
+        app:layout_constraintEnd_toEndOf="@+id/yeniListe"
+        app:layout_constraintStart_toStartOf="@+id/yeniListe" />
+
+    <EditText
+        android:id="@+id/editTextNumber30"
+        android:layout_width="328dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:text="Not "
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/yeniListe"
+        app:layout_constraintEnd_toEndOf="@+id/yeniListe"
+        app:layout_constraintStart_toStartOf="@+id/yeniListe" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine30"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/button30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kaydet"
+        app:layout_constraintEnd_toEndOf="@+id/yeniListe"
+        app:layout_constraintStart_toStartOf="@+id/yeniListe"
+        tools:layout_editor_absoluteY="295dp" />
+
+</LinearLayout>
