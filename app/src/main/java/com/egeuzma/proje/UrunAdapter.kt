@@ -45,19 +45,39 @@ class UrunAdapter (private val productname :ArrayList<String>,private val isim:S
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.urun_ekleme_dialog)
             dialog.button30.setOnClickListener {
-                addProductToList(holder.recyclerText?.context!!)
+                val map = HashMap<String,Any>()
+                map.put("UrunAdi",productname[position])
+                map.put("UrunAdeti",dialog.editTextNumber30.text.toString())
+                map.put("UrunNotu",dialog.editTextTextMultiLine30.text.toString())
+                addProductToList(holder.recyclerText?.context!!,map)
+                dialog.cancel()
             }
             dialog.show()
-            //Toast.makeText(holder.recyclerText?.context,productname[position]+" listeye eklendi",Toast.LENGTH_SHORT).show()
+
         }
     }
 
-    fun addProductToList(context: Context) {
+    fun addProductToList(context: Context,urunmap:HashMap<String,Any>) {
         var db = FirebaseFirestore.getInstance()
         var products : ArrayList<HashMap<String,Any>> = ArrayList()
+        var count =0
         db.collection("Listeler").whereEqualTo("isim",isim).get().addOnSuccessListener { documents ->
             for (document in documents){
                  products = document.get("Urunler") as ArrayList<HashMap<String, Any>>
+            }
+            for (product in products){
+                if (product.getValue("UrunAdi").toString()==urunmap.getValue("UrunAdi").toString()){
+                    Toast.makeText(context,"Bu ürün zaten listede var",Toast.LENGTH_SHORT).show()
+                    count=1
+                }
+            }
+            if(count==0){
+                products.add(urunmap)
+                val listmap = hashMapOf<String, Any>()
+                listmap.put("Urunler", products)
+                listmap.put("isim", isim)
+                db.collection("Listeler").document(isim).set(listmap)
+                Toast.makeText(context,urunmap.getValue("UrunAdi").toString()+" listeye eklendi",Toast.LENGTH_SHORT).show()
             }
 
         }

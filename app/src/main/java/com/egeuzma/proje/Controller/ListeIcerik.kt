@@ -97,6 +97,7 @@ class ListeIcerik : AppCompatActivity() {
         val intent = Intent(applicationContext, UrunEkleme::class.java)
         intent.putExtra("isim",selectedList)
         startActivity(intent)
+        finish()
     }
     fun deleteList(view: View){
         var list =db.collection("Listeler").document(selectedList!!)
