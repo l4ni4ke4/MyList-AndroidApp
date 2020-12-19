@@ -32,8 +32,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="433dp"
-        android:layout_height="170dp"
+        android:layout_width="422dp"
+        android:layout_height="162dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="207dp"
         app:layout_constraintBottom_toTopOf="@+id/textView23" app:layout_constraintEnd_toEndOf="parent"
@@ -44,20 +44,7 @@
         <LinearLayout
             android:id="@+id/kalori_item_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="vertical">
-            <TextView
-                android:id="@+id/kal_item_row2"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_weight="1"
-                android:background="#FF9800"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:singleLine="false"
-                android:text="TextView"
-                android:textColor="#000000"
-                android:textSize="30sp"/>
-        </LinearLayout>
+            android:layout_height="wrap_content" android:orientation="vertical"/>
     </ScrollView>
     <TextView
         android:id="@+id/textView23"

@@ -9,17 +9,17 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.PopupWindow
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.Controller.ListeIcerik
 import com.egeuzma.proje.Controller.KaloriHesaplayici
+import com.egeuzma.proje.Controller.selectedItemsList
+import com.egeuzma.proje.Controller.toplamKalori
 import kotlinx.android.synthetic.main.activity_kalori_hesaplayici.view.*
 import kotlinx.android.synthetic.main.recycler_view_row.view.*
 
-class KaloriUrunAdapter (private val productName : ArrayList<String>,private val context: Context):RecyclerView.Adapter<KaloriUrunAdapter.KaloriUrunHolder>(){
+class KaloriUrunAdapter (private val productName : ArrayList<String>,private val productUnitCal: ArrayList
+                         <Number>,private val context: Context):RecyclerView.Adapter<KaloriUrunAdapter.KaloriUrunHolder>(){
 
     private lateinit var viewgroup : ViewGroup
     class KaloriUrunHolder(view: View):RecyclerView.ViewHolder(view){
@@ -57,13 +57,23 @@ class KaloriUrunAdapter (private val productName : ArrayList<String>,private val
             builder.setView(view)
                 .setPositiveButton("Ekle",
                 DialogInterface.OnClickListener { dialog, id ->
+                    var miktar: String = ""
+                    miktar = "${view.findViewById<EditText>(R.id.text_miktar).text}"
+                    val miktarD = miktar.toDoubleOrNull()
+                    if(miktarD !is Double){
+                        Toast.makeText(context,"Girdiğiniz sayı geçersiz",Toast.LENGTH_LONG).show()
+                    }
+                    else{
+                        val unitcalorie = productUnitCal[position] as Double
+                        val urunCal = miktarD!! * unitcalorie
+                        toplamKalori += urunCal
+                        val textToSend = "${productName[position]} , $miktar, kalori: $urunCal"
 
-                    val miktar = view.findViewById<EditText>(R.id.text_miktar).text
-                    val textToSend = "${productName[position]} , $miktar"
-
-                    val intent = Intent(context, KaloriHesaplayici::class.java)
-                    intent.putExtra("textToSend",textToSend)
-                    context.startActivity(intent)
+                        val intent = Intent(context, KaloriHesaplayici::class.java)
+                        //intent.putExtra("textToSend",textToSend)
+                        selectedItemsList.add(textToSend)
+                        context.startActivity(intent)
+                    }
 
 
                 })
@@ -81,4 +91,6 @@ class KaloriUrunAdapter (private val productName : ArrayList<String>,private val
         }
 
     }
+
+
 }
