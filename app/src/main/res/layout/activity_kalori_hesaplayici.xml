@@ -30,14 +30,22 @@
         app:layout_constraintTop_toBottomOf="@+id/textView15">
     </SearchView>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchResultRecyclerView"
+        android:layout_width="410dp"
+        android:layout_height="192dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="422dp"
         android:layout_height="162dp"
-        android:layout_marginTop="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchResultRecyclerView">
 
@@ -50,12 +58,13 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="424dp"
-        android:layout_height="68dp"
+        android:layout_width="411dp"
+        android:layout_height="37dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
         <TextView
             android:id="@+id/textView23"
@@ -75,24 +84,18 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchResultRecyclerView"
-        android:layout_width="410dp"
-        android:layout_height="192dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView2" />
-
     <Button
         android:id="@+id/goHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
-        android:layout_marginTop="24dp" android:layout_marginEnd="197dp"
-        android:layout_marginBottom="150dp" android:text="Ana Sayfa"
-        app:layout_constraintBottom_toTopOf="@+id/searchResultRecyclerView" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView15" app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="197dp"
+        android:layout_marginBottom="150dp"
+        android:text="Ana Sayfa"
+        app:layout_constraintBottom_toTopOf="@+id/searchResultRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
