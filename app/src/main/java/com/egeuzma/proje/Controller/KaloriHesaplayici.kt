@@ -30,6 +30,7 @@ class KaloriHesaplayici : AppCompatActivity() {
     var productsName : ArrayList<String> = ArrayList()
     var productsCalorie :ArrayList<Number> = ArrayList()
     var products1 :ArrayList<String> = ArrayList()
+    var calorie1 :ArrayList<Number> = ArrayList()
     var adapter : KaloriUrunAdapter? = null
 
 
@@ -81,16 +82,24 @@ class KaloriHesaplayici : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if(newText!!.isNotEmpty()){
                     productsName.clear()
+                    productsCalorie.clear()
                     val search = newText.toLowerCase(Locale.getDefault())
                     products1.forEach {
                         if(it.toLowerCase(Locale.getDefault()).contains(search)){
+
+                            productsCalorie.add(calorie1.get(products1.indexOf(it)))
                             productsName.add(it)
+
                         }
                         searchResultRecyclerView.adapter!!.notifyDataSetChanged()
                     }
+
                 }else{
                     productsName.clear()
                     productsName.addAll(products1)
+                    productsCalorie.clear()
+                    productsCalorie.addAll(calorie1)
+
                     searchResultRecyclerView.adapter!!.notifyDataSetChanged()
                 }
                 return true
@@ -154,10 +163,12 @@ class KaloriHesaplayici : AppCompatActivity() {
                             val Unit_calorie = document.get("Unit_calorie") as String
                             val Unit_type = document.get("Unit_type") as String*/
 
-                            println(Name)
+                           // println(Name)
                             productsName.add(Name)
                             products1.add(Name)
                             productsCalorie.add(Unit_calorie as Number)
+                            calorie1.add(Unit_calorie as Number)
+
                             //productsCalorie.add(Unit_calorie)
 
                             //adapter!!.notifyDataSetChanged()
