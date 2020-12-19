@@ -2,9 +2,11 @@ package com.egeuzma.proje.Controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.egeuzma.proje.KalorieAdapter
+import com.egeuzma.proje.KaloriUrunAdapter
 import com.egeuzma.proje.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_kalori_hesaplayici.*
@@ -13,11 +15,14 @@ import kotlinx.android.synthetic.main.activity_urun_ekleme.*
 class KaloriHesaplayici : AppCompatActivity() {
 
     private lateinit var  db : FirebaseFirestore
+   // private lateinit var binding: ActivityMainBinding
+
+
 
     var productsName : ArrayList<String> = ArrayList()
     var productsCalorie :ArrayList<Number> = ArrayList()
 
-    var adapter : KalorieAdapter? = null
+    var adapter : KaloriUrunAdapter? = null
 
     var toplamKalori = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,17 +35,26 @@ class KaloriHesaplayici : AppCompatActivity() {
         verileriFirestoredanCekme()
 
         var layoutManager = LinearLayoutManager(this)
-        recyclerViewCalorie.layoutManager = layoutManager
+        searchResultRecyclerView.layoutManager = layoutManager
 
+        adapter = KaloriUrunAdapter(productsName,this)
+        searchResultRecyclerView.adapter =adapter
 
-
-        adapter = KalorieAdapter(productsName)
-        recyclerViewCalorie.adapter =adapter
+        val itemViewText = intent.getStringExtra("textToSend")
+        createDisplayItems(itemViewText?:"null")
 
         toplamKalori = 15
         println(toplamKalori)
         textView23.text = "Toplam Kalori = $toplamKalori"
     }
+
+     fun createDisplayItems(inputText : String)
+    {
+        var itemview = findViewById<TextView>(R.id.kal_item_row2)
+        itemview.text = inputText
+
+    }
+
 
     fun verileriFirestoredanCekme(){
         db.collection("Urunler").addSnapshotListener { snapshot, exception ->
@@ -72,8 +86,8 @@ class KaloriHesaplayici : AppCompatActivity() {
                                 recept
                             )
                             //tarifName.add(isim)
-                            tarifler.add(myTarif)
-                            adapter!!.notifyDataSetChanged()*/
+                            tarifler.add(myTarif)*/
+                            adapter!!.notifyDataSetChanged()
                         }
                     }
                 }
