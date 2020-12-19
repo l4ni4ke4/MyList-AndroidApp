@@ -16,7 +16,7 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <SearchView
         android:id="@+id/searchView2"
@@ -27,79 +27,75 @@
         android:iconifiedByDefault="false"
         android:queryHint="Ürün ara veya ekle"
         app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15">
+    </SearchView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchResultRecyclerView"
+        android:layout_width="410dp"
+        android:layout_height="192dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2" />
 
     <ScrollView
-        android:layout_width="412dp"
-        android:layout_height="371dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView23"
+        android:id="@+id/scrollView2"
+        android:layout_width="422dp"
+        android:layout_height="162dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView2">
+        app:layout_constraintTop_toBottomOf="@+id/searchResultRecyclerView">
 
         <LinearLayout
+            android:id="@+id/kalori_item_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="#6CA62D"
-                android:text="Çikolata 100 gr"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="#6CA62D"
-                android:text="Elma 100 gr"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="#6CA62D"
-                android:text="Muz 100 gr"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView22"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="#6CA62D"
-                android:text="Ekmek 50 gr"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-        </LinearLayout>
+            android:orientation="vertical" />
     </ScrollView>
 
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="358dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:text="Toplam Kalori = 300"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="411dp"
+        android:layout_height="37dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="279dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:gravity="center"
+            android:text="Toplam Kalori = 300"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/calRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temizle" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/goHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="197dp"
+        android:layout_marginBottom="150dp"
+        android:text="Ana Sayfa"
+        app:layout_constraintBottom_toTopOf="@+id/searchResultRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
