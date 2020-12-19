@@ -64,15 +64,21 @@ class KaloriUrunAdapter (private val productName : ArrayList<String>,private val
                         Toast.makeText(context,"Girdiğiniz sayı geçersiz",Toast.LENGTH_LONG).show()
                     }
                     else{
-                        val unitcalorie = productUnitCal[position] as Double
-                        val urunCal = miktarD!! * unitcalorie
-                        toplamKalori += urunCal
-                        val textToSend = "${productName[position]} , $miktar, kalori: $urunCal"
+                        if(productUnitCal[position] is Long)
+                        {
+                            Toast.makeText(context,"Kalori bilgisi bulunamadı",Toast.LENGTH_LONG).show()
+                        }else{
+                            val unitcalorie = productUnitCal[position] as Double
+                            val urunCal = miktarD!! * unitcalorie
+                            toplamKalori += urunCal
+                            val textToSend = "${productName[position]} , $miktar, kalori: $urunCal"
 
-                        val intent = Intent(context, KaloriHesaplayici::class.java)
-                        //intent.putExtra("textToSend",textToSend)
-                        selectedItemsList.add(textToSend)
-                        context.startActivity(intent)
+                            val intent = Intent(context, KaloriHesaplayici::class.java)
+                            //intent.putExtra("textToSend",textToSend)
+                            selectedItemsList.add(textToSend)
+                            context.startActivity(intent)
+                        }
+
                     }
 
 

@@ -16,7 +16,7 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <SearchView
         android:id="@+id/searchView2"
@@ -35,11 +35,10 @@
         android:layout_width="422dp"
         android:layout_height="162dp"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="207dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView23" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/calRefresh" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchResultRecyclerView" app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/searchResultRecyclerView">
 
         <LinearLayout
             android:id="@+id/kalori_item_layout"
@@ -50,20 +49,36 @@
         android:id="@+id/textView23"
         android:layout_width="358dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
         android:text="Toplam Kalori = 300"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintHorizontal_bias="0.332"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/calRefresh"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResultRecyclerView"
         android:layout_width="421dp" android:layout_height="150dp"
-        android:layout_marginTop="12dp" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0" app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView2"
-    />
+        android:layout_marginTop="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/searchView2"/>
+    <Button
+        android:id="@+id/calRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_marginTop="14dp"
+        android:layout_marginBottom="16dp" android:text="Temizle"
+        app:layout_constraintBottom_toTopOf="@+id/textView23" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.803" app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"/>
+    <Button
+        android:id="@+id/goHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="24dp" android:layout_marginEnd="197dp"
+        android:layout_marginBottom="150dp" android:text="Ana Sayfa"
+        app:layout_constraintBottom_toTopOf="@+id/searchResultRecyclerView" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView15" app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

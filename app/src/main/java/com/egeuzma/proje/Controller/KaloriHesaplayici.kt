@@ -7,7 +7,9 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.inflate
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -25,7 +27,6 @@ var toplamKalori = 0.0
 class KaloriHesaplayici : AppCompatActivity() {
 
     private lateinit var  db : FirebaseFirestore
-    lateinit var receiver : BroadcastReceiver
 
     var productsName : ArrayList<String> = ArrayList()
     var productsCalorie :ArrayList<Number> = ArrayList()
@@ -48,6 +49,20 @@ class KaloriHesaplayici : AppCompatActivity() {
         adapter = KaloriUrunAdapter(productsName,productsCalorie,this)
         searchResultRecyclerView.adapter =adapter
 
+        val refreshBtn = findViewById<Button>(R.id.calRefresh)
+
+        refreshBtn.setOnClickListener{
+            refreshProducts()
+            val intent = intent
+            finish()
+            startActivity(intent)
+        }
+        val anasayfabtn = findViewById<Button>(R.id.goHome)
+        anasayfabtn.setOnClickListener{
+            finish()
+            goToHome()
+        }
+
        // val itemViewText = intent.getStringExtra("textToSend")
         var itemsLayout : LinearLayout = findViewById(R.id.kalori_item_layout)
 
@@ -60,10 +75,6 @@ class KaloriHesaplayici : AppCompatActivity() {
         textView23.text = "Toplam Kalori = $toplamKalori"
     }
 
-    override fun onDestroy() {
-        unregisterReceiver(receiver)
-        super.onDestroy()
-    }
 
     fun createDisplayItems(itemsLayout:LinearLayout)
     {
@@ -78,6 +89,20 @@ class KaloriHesaplayici : AppCompatActivity() {
         val itemRowText: TextView = itemRowView.findViewById(R.id.kal_item_row)
         itemRowText.text = inputText
         itemsLayout.addView(itemRowView)
+
+    }
+
+    fun refreshProducts() {
+        selectedItemsList.clear()
+        toplamKalori =0.0
+    }
+
+    fun goToHome()
+    {
+        val intent = Intent(applicationContext,
+            MainActivity::class.java)
+
+        startActivity(intent)
 
     }
 
