@@ -1,5 +1,6 @@
 package com.egeuzma.proje
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.BlurMaskFilter
 import android.graphics.Paint
@@ -8,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.egeuzma.proje.Controller.ListeIcerik
 import com.egeuzma.proje.Controller.UrunDetayi
-import kotlinx.android.synthetic.main.recycler_view_row.view.*
+
 
 class MalzemeAdapter (private val productName : ArrayList<String>,private val productNumber : ArrayList<String>,private val productNote : ArrayList<String>,private val liste:String):RecyclerView.Adapter<MalzemeAdapter.MalzemeHolder>(){
     class MalzemeHolder(view: View):RecyclerView.ViewHolder(view){
@@ -50,7 +50,7 @@ class MalzemeAdapter (private val productName : ArrayList<String>,private val pr
             intent.putExtra("adet",productNumber[position])
             intent.putExtra("liste",liste)
             context?.startActivity(intent)
-
+            (context as Activity).finish()
             true
         }
     }

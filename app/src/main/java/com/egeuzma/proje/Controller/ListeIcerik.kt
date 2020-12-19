@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.change_liste_ismi.*
 class ListeIcerik : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
     var productName : ArrayList<String> = ArrayList()
-    
     var product : ArrayList<String> = ArrayList()
     var deneme: ArrayList<HashMap<String,Any>> = ArrayList()
     var adapter : MalzemeAdapter?=null
