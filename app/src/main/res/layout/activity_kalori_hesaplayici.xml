@@ -34,43 +34,57 @@
         android:id="@+id/scrollView2"
         android:layout_width="422dp"
         android:layout_height="162dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/calRefresh" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchResultRecyclerView">
 
         <LinearLayout
             android:id="@+id/kalori_item_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="vertical"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
     </ScrollView>
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="358dp"
-        android:layout_height="40dp"
-        android:text="Toplam Kalori = 300"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="424dp"
+        android:layout_height="68dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.332"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/calRefresh"/>
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="279dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:gravity="center"
+            android:text="Toplam Kalori = 300"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/calRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temizle" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResultRecyclerView"
-        android:layout_width="421dp" android:layout_height="150dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2" app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="410dp"
+        android:layout_height="192dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/searchView2"/>
-    <Button
-        android:id="@+id/calRefresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_marginTop="14dp"
-        android:layout_marginBottom="16dp" android:text="Temizle"
-        app:layout_constraintBottom_toTopOf="@+id/textView23" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803" app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView2" />
+
     <Button
         android:id="@+id/goHome"
         android:layout_width="wrap_content"

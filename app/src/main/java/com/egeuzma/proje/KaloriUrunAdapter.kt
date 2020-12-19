@@ -58,7 +58,7 @@ class KaloriUrunAdapter (private val productName : ArrayList<String>,private val
                 .setPositiveButton("Ekle",
                 DialogInterface.OnClickListener { dialog, id ->
                     var miktar: String = ""
-                    miktar = "${view.findViewById<EditText>(R.id.text_miktar).text}"
+                    miktar = "${view.findViewById<EditText>(R.id.text_miktar)}"
                     val miktarD = miktar.toDoubleOrNull()
                     if(miktarD !is Double){
                         Toast.makeText(context,"Girdiğiniz sayı geçersiz",Toast.LENGTH_LONG).show()

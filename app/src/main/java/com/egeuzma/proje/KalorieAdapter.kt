@@ -20,7 +20,6 @@ class KalorieAdapter (private val kaloriNameArray :ArrayList<String>): RecyclerV
     class PostHolder(view: View) : RecyclerView.ViewHolder(view){
         var recyclerText : TextView? = null
 
-
         init {
             recyclerText = view.findViewById(R.id.textView)
         }

@@ -9,10 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.inflate
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.egeuzma.proje.KaloriUrunAdapter
 import com.egeuzma.proje.R
@@ -20,6 +17,8 @@ import com.google.api.Distribution
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_kalori_hesaplayici.*
 import kotlinx.android.synthetic.main.activity_urun_ekleme.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 var selectedItemsList:ArrayList<String> = ArrayList()
 var toplamKalori = 0.0
@@ -30,7 +29,7 @@ class KaloriHesaplayici : AppCompatActivity() {
 
     var productsName : ArrayList<String> = ArrayList()
     var productsCalorie :ArrayList<Number> = ArrayList()
-
+    var products1 :ArrayList<String> = ArrayList()
     var adapter : KaloriUrunAdapter? = null
 
 
@@ -73,6 +72,31 @@ class KaloriHesaplayici : AppCompatActivity() {
 
         println(toplamKalori)
         textView23.text = "Toplam Kalori = $toplamKalori"
+
+        searchView2.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if(newText!!.isNotEmpty()){
+                    productsName.clear()
+                    val search = newText.toLowerCase(Locale.getDefault())
+                    products1.forEach {
+                        if(it.toLowerCase(Locale.getDefault()).contains(search)){
+                            productsName.add(it)
+                        }
+                        searchResultRecyclerView.adapter!!.notifyDataSetChanged()
+                    }
+                }else{
+                    productsName.clear()
+                    productsName.addAll(products1)
+                    searchResultRecyclerView.adapter!!.notifyDataSetChanged()
+                }
+                return true
+            }
+
+        })
     }
 
 
@@ -115,6 +139,10 @@ class KaloriHesaplayici : AppCompatActivity() {
                 if(snapshot!=null){
                     if(!snapshot.isEmpty){
 
+                        productsName.clear()
+
+                        products1.clear()
+
                         val documents = snapshot.documents
                         for (document in documents){
                             //val Category = document.get("Category") as String
@@ -128,6 +156,7 @@ class KaloriHesaplayici : AppCompatActivity() {
 
                             println(Name)
                             productsName.add(Name)
+                            products1.add(Name)
                             productsCalorie.add(Unit_calorie as Number)
                             //productsCalorie.add(Unit_calorie)
 
