@@ -117,11 +117,9 @@ class UrunDetayi : AppCompatActivity() {
                     deneme1 = deneme.clone() as ArrayList<HashMap<String, Any>>
                     for (x in deneme) {
                         if (x.getValue("UrunAdi").toString() == textView9.text) {
-                            //deneme1.remove(x)
                             x.put("UrunAdi", textView9.text.toString())
                             x.put("UrunAdeti", textView11.text.toString())
                             x.put("UrunNotu", textView12.text.toString())
-                            //deneme1.add(x)
                             deneme1.set(count, x)
                             val listmap = hashMapOf<String, Any>()
                             listmap.put("Urunler", deneme1)
@@ -133,52 +131,5 @@ class UrunDetayi : AppCompatActivity() {
                     }
                 }
             }
-                /*db.collection("Listeler").whereEqualTo("isim",liste).addSnapshotListener { snapshot, exception ->
-            if (exception != null) {
-                Toast.makeText(
-                    applicationContext,
-                    exception.localizedMessage.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
-            } else {
-                if (snapshot != null) {
-                    if (!snapshot.isEmpty) {
-                        val documents = snapshot.documents
-                        for (document in documents) {
-                            deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
-                            deneme1 = deneme.clone() as ArrayList<HashMap<String, Any>>
-                            for (x in deneme){
-                                println(x)
-                                if(x.getValue("UrunAdi").toString()==textView9.text){
-                                    //deneme1.remove(x)
-                                    x.put("UrunAdi",textView9.text.toString())
-                                    x.put("UrunAdeti",textView11.text.toString())
-                                    x.put("UrunNotu",textView12.text.toString())
-                                    deneme1.set(count,x)
-                                   // println(deneme1)
-                                    //println(x)
-                                    val listmap = hashMapOf<String,Any>()
-                                    listmap.put("Urunler",deneme1)
-                                    listmap.put("isim", liste!!)
-                                    println(listmap)
-                                    addDatabase(listmap,liste!!)
-
-
-                                   /* val intent = Intent(applicationContext,
-                                        ListeIcerik::class.java)
-                                    intent.putExtra("info","old")
-                                    intent.putExtra("isim",liste)
-                                    startActivity(intent)
-                                    finish()*/
-                                }
-                                count++
-                            }
-                        }
-                    }
-                }
-
-            }*/
-
-
     }
 }

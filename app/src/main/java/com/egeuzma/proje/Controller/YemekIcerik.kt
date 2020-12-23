@@ -45,10 +45,11 @@ class YemekIcerik : AppCompatActivity() {
                 map.put("UrunAdi",malzeme)
                 map.put("UrunAdeti","0")
                 map.put("UrunNotu","")
+                map.put("isCheck",false)
                 products.add(map)
             }
             val listmap = hashMapOf<String,Any>()
-            val isim=selectedTarif + " Listesi"
+            val isim=selectedTarif + " Listesi" + documents.size()+1
             listmap.put("isim",isim)
             listmap.put("Urunler",products)
             addListToDatabase(listmap,isim)

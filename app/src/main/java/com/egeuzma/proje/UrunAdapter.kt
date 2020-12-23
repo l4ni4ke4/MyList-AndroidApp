@@ -49,6 +49,7 @@ class UrunAdapter (private val productname :ArrayList<String>,private val isim:S
                 map.put("UrunAdi",productname[position])
                 map.put("UrunAdeti",dialog.editTextNumber30.text.toString())
                 map.put("UrunNotu",dialog.editTextTextMultiLine30.text.toString())
+                map.put("isCheck",false)
                 addProductToList(holder.recyclerText?.context!!,map)
                 dialog.cancel()
             }

@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.change_liste_ismi.*
 class ListeIcerik : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
     var productName : ArrayList<String> = ArrayList()
-    var product : ArrayList<String> = ArrayList()
+    var productCheck : ArrayList<Boolean> = ArrayList()
     var deneme: ArrayList<HashMap<String,Any>> = ArrayList()
     var adapter : MalzemeAdapter?=null
     var selectedList:String? = null
@@ -46,7 +46,7 @@ class ListeIcerik : AppCompatActivity() {
 
         var layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        adapter = MalzemeAdapter(productName,productNumber,productNote,selectedList!!)
+        adapter = MalzemeAdapter(productName,productNumber,productNote,selectedList!!,productCheck)
         recyclerView.adapter = adapter
         recyclerView.setOnTouchListener(object : View.OnTouchListener {
 
@@ -56,8 +56,7 @@ class ListeIcerik : AppCompatActivity() {
 
                 return false;
             }
-        });
-
+        })
     }
     fun getFromFirebase(selectedList :String) {
         db.collection("Listeler").whereEqualTo("isim", selectedList)
@@ -74,6 +73,7 @@ class ListeIcerik : AppCompatActivity() {
                             productName.clear()
                             productNote.clear()
                             productNumber.clear()
+                            productCheck.clear()
                             val documents = snapshot.documents
                             for (document in documents) {
                                 if (deneme.isEmpty()) {
@@ -83,6 +83,8 @@ class ListeIcerik : AppCompatActivity() {
                                         productName.add(x.getValue("UrunAdi") as String)
                                         productNumber.add(x.getValue("UrunAdeti")as String)
                                         productNote.add(x.getValue("UrunNotu")as String)
+                                        productCheck.add(x.getValue("isCheck")as Boolean)
+                                        checkedProduct(productCheck)
                                     }
                                 }
                                 adapter!!.notifyDataSetChanged()
@@ -92,6 +94,15 @@ class ListeIcerik : AppCompatActivity() {
 
                 }
             }
+    }
+    fun checkedProduct(list: ArrayList<Boolean>){
+        var count=0
+        for (product in list){
+            if (product){
+                count++
+            }
+        }
+        textView18.text=count.toString()+"/"+list.size.toString()
     }
     fun addProduct(view: View){
         val intent = Intent(applicationContext, UrunEkleme::class.java)
@@ -107,5 +118,6 @@ class ListeIcerik : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 
 }

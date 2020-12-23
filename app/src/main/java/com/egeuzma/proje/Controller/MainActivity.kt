@@ -17,6 +17,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_liste_icerik.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.change_liste_ismi.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class MainActivity : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
@@ -29,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         button2.isEnabled= false
         db = FirebaseFirestore.getInstance()
-
+        //var Language = Locale.getDefault().getLanguage()
         getData()
         var layoutManager = LinearLayoutManager(this)
         recyclerView3.layoutManager = layoutManager
@@ -42,7 +45,6 @@ class MainActivity : AppCompatActivity() {
             if(exception != null){
                 Toast.makeText(applicationContext,exception.localizedMessage.toString(), Toast.LENGTH_LONG).show()
             }else{
-                println("Database bağlantısı sağlandı.")
                 if(snapshot!=null){
                     if (!snapshot.isEmpty){
                        listName.clear()
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                             var myList = Liste(isim, malzeme)
                             lists.add(myList)
                             listName.add(isim)
+
                             adapter!!.notifyDataSetChanged()
                         }
                     }
