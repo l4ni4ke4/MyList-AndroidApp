@@ -49,7 +49,7 @@ class YemekIcerik : AppCompatActivity() {
                 products.add(map)
             }
             val listmap = hashMapOf<String,Any>()
-            val isim=selectedTarif + " Listesi" + documents.size()+1
+            val isim=selectedTarif + " Listesi"
             listmap.put("isim",isim)
             listmap.put("Urunler",products)
             addListToDatabase(listmap,isim)
