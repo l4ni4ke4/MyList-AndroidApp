@@ -76,10 +76,7 @@ class UrunEkleme : AppCompatActivity() {
                 }
                 return true
             }
-
         })
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

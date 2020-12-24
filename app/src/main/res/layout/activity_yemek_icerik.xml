@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#8E24AA"
             android:onClick="addMalzeme"
-            android:text="Malzemeleri ekle"
+            android:text="@string/malzemeekle_but"
             android:textAllCaps="false"
             android:textSize="18sp" />
 

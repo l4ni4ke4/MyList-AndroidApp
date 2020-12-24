@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/item13" android:title="Tüm Ürünler"></item>
-    <item android:id="@+id/item1" android:title="Alkollü İçkiler ve İçecekler" ></item>
-    <item android:id="@+id/item2" android:title="Alkolsüz İçecekler"></item>
-    <item android:id="@+id/item9" android:title="Çerezler"></item>
-    <item android:id="@+id/item12" android:title="Dondurma ve Dondurulmuş Tatlılar"></item>
-    <item android:id="@+id/item10" android:title="Ekmek ve Pasta Malzemeleri"></item>
-    <item android:id="@+id/item4" android:title="Et ve Balık Ürünler"></item>
-    <item android:id="@+id/item3" android:title="Kuru Gıda"></item>
-    <item android:id="@+id/item6" android:title="Meyve ve Sebzeler"></item>
-    <item android:id="@+id/item7" android:title="Ot ve Baharatlar"></item>
-    <item android:id="@+id/item11" android:title="Sıvı ve Katı Yağlar"></item>
-    <item android:id="@+id/item5" android:title="Süt ve Süt Ürünleri"></item>
-    <item android:id="@+id/item8" android:title="Temizlik Ürünleri"></item>
+    <item android:id="@+id/item13" android:title="@string/tümürünler"></item>
+    <item android:id="@+id/item1" android:title="@string/alkollü" ></item>
+    <item android:id="@+id/item2" android:title="@string/alkolsüz"></item>
+    <item android:id="@+id/item9" android:title="@string/çerez"></item>
+    <item android:id="@+id/item12" android:title="@string/dondurma"></item>
+    <item android:id="@+id/item10" android:title="@string/ekmek"></item>
+    <item android:id="@+id/item4" android:title="@string/et"></item>
+    <item android:id="@+id/item3" android:title="@string/kurugıda"></item>
+    <item android:id="@+id/item6" android:title="@string/meyve"></item>
+    <item android:id="@+id/item7" android:title="@string/ot"></item>
+    <item android:id="@+id/item11" android:title="@string/yag"></item>
+    <item android:id="@+id/item5" android:title="@string/süt"></item>
+    <item android:id="@+id/item8" android:title="@string/temizlik"></item>
 </menu>

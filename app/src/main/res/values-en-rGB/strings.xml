@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Proje</string>
+    <string name="listelerim">My Lists</string>
+    <string name="listelerim_but">My Lists</string>
+    <string name="yemek_tarif_but">Recipes</string>
+    <string name="kalori_hesaplayıcı_but">Calorie Calculator</string>
+    <string name="yeniliste_but">New List +</string>
+    <string name="alinanürünler">Recieved Products</string>
+    <string name="ürünekle_but">Add Product</string>
+    <string name="listeyisil_but">Delete List</string>
+    <string name="adet_gram">PIECES / GRAM</string>
+    <string name="not">NOTE</string>
+    <string name="ürünüsil_but">Delete Product</string>
+    <string name="kaydet_but">Save</string>
+    <string name="tümürünler">All Products</string>
+    <string name="alkollü">Alcoholic Beverages and Drinks</string>
+    <string name="alkolsüz">Soft drinks</string>
+    <string name="çerez">Cookies</string>
+    <string name="dondurma">Ice Cream and Frozen Desserts</string>
+    <string name="ekmek">Bread and Pastry Materials</string>
+    <string name="et">Meat and Fish Products</string>
+    <string name="kurugıda">Dry food</string>
+    <string name="meyve">Fruits and Vegetables</string>
+    <string name="ot">Herbs and Spices</string>
+    <string name="yag">Liquid and Fats</string>
+    <string name="süt">Milk and milk products</string>
+    <string name="temizlik">Cleaning products</string>
+    <string name="yemektarifleri">Recipes</string>
+    <string name="malzemeekle_but">Add Ingredients</string>
+    <string name="kalori">Calories Calculator</string>
+    <string name="toplamkalori">Total Calories</string>
+    <string name="temizle">Clean</string>
+    <string name="ev">Home</string>
+    <string name="ürünadı">PRODUCT NAME</string>
+    <string name="arama">Search or add products</string>
+    <string name="adetgir">Enter Pieces / Gram</string>
+    <string name="yenilisteismi">New List Name</string>
+    <string name="notgir">Enter note :</string>
+    <string name="isimgiriniz">Enter name</string>
+    <string name="toast1">The list with this name already exists. Enter another name.</string>
+    <string name="toast2">This product is already on the list.</string>
+    <string name="toast3">added to the list</string>
+</resources>

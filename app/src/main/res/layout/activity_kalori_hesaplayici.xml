@@ -12,7 +12,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="Kalori Hesaplayıcı"
+        android:text="@string/kalori"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
-        android:text="Ev"
+        android:text="@string/ev"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +36,7 @@
         android:layout_marginTop="24dp"
         android:background="#FFFFFF"
         android:iconifiedByDefault="false"
-        android:queryHint="Ürün ara veya ekle"
+        android:queryHint="@string/arama"
         app:layout_constraintStart_toStartOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView15">
     </SearchView>
@@ -83,7 +83,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
             android:gravity="center_vertical"
-            android:text="Toplam Kalori = 300"
+            android:text="@string/kalori_hesaplayıcı_but"
             android:textColor="#FFFFFF"
             android:textSize="28sp" />
 
@@ -91,7 +91,7 @@
             android:id="@+id/calRefresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Temizle" />
+            android:text="@string/temizle" />
 
     </LinearLayout>
 

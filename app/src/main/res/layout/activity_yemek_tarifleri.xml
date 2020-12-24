@@ -13,7 +13,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="1dp"
-        android:text="Yemek Tarifleri"
+        android:text="@string/yemektarifleri"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView2"

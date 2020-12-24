@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                println(edittext.text)
                //db.collection("Listeler").document(edittext.text.toString()).set(map)
                if(listName.contains(edittext.text.toString())){
-                   textview.text="Bu isimli liste zaten var. Başka isim giriniz."
+                   textview.text=resources.getString(R.string.toast1)
                }else{
                    db.collection("Listeler").document(edittext.text.toString()).set(map)
                    val intent = Intent(applicationContext,ListeIcerik::class.java)

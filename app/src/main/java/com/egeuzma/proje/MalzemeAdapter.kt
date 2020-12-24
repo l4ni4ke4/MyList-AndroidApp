@@ -3,6 +3,7 @@ package com.egeuzma.proje
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.graphics.BlurMaskFilter
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.egeuzma.proje.Controller.ListeIcerik
+import com.egeuzma.proje.Controller.MainActivity
 import com.egeuzma.proje.Controller.UrunDetayi
 import com.egeuzma.proje.model.Liste
 import com.google.firebase.firestore.FirebaseFirestore
@@ -78,6 +81,7 @@ class MalzemeAdapter (private val productName : ArrayList<String>,private val pr
     }
     fun addProductToList(context: Context, urunmap:HashMap<String,Any>,index: Int) {
         var db = FirebaseFirestore.getInstance()
+
         var products : ArrayList<HashMap<String,Any>> = ArrayList()
         db.collection("Listeler").whereEqualTo("isim",liste).get().addOnSuccessListener { documents->
             for(document in documents){

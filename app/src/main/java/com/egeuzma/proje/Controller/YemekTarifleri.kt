@@ -44,10 +44,11 @@ class YemekTarifleri : AppCompatActivity() {
                           val isim = document.get("isim") as String
                           val malzeme = document.get("malzemeler") as ArrayList<String>
                           val recept = document.get("tarif") as String
+                         // val recept2 =document.get("tarif2") as String
                           var myTarif = YemekTarif(
                               isim,
                               malzeme,
-                              recept
+                              recept!!
                           )
                           //tarifName.add(isim)
                           tarifler.add(myTarif)

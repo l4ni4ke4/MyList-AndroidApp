@@ -13,7 +13,7 @@
         android:layout_width="313dp"
         android:layout_height="77dp"
         android:layout_marginBottom="30dp"
-        android:text="Adet giriniz :"
+        android:text="@string/adetgir"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -32,7 +32,7 @@
         android:id="@+id/button22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kaydet"
+        android:text="@string/kaydet_but"
         app:layout_constraintEnd_toEndOf="@+id/yeniListe"
         app:layout_constraintStart_toStartOf="@+id/yeniListe"
         tools:layout_editor_absoluteY="295dp" />

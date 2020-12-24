@@ -3,6 +3,7 @@ package com.egeuzma.proje
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.Controller.ListeIcerik
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.rpc.context.AttributeContext
 import kotlinx.android.synthetic.main.urun_ekleme_dialog.*
 
 class UrunAdapter (private val productname :ArrayList<String>,private val isim:String): RecyclerView.Adapter<UrunAdapter.UrunHolder>() {
@@ -68,7 +70,7 @@ class UrunAdapter (private val productname :ArrayList<String>,private val isim:S
             }
             for (product in products){
                 if (product.getValue("UrunAdi").toString()==urunmap.getValue("UrunAdi").toString()){
-                    Toast.makeText(context,"Bu ürün zaten listede var",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,R.string.toast2,Toast.LENGTH_SHORT).show()
                     count=1
                 }
             }
@@ -78,7 +80,9 @@ class UrunAdapter (private val productname :ArrayList<String>,private val isim:S
                 listmap.put("Urunler", products)
                 listmap.put("isim", isim)
                 db.collection("Listeler").document(isim).set(listmap)
-                Toast.makeText(context,urunmap.getValue("UrunAdi").toString()+" listeye eklendi",Toast.LENGTH_SHORT).show()
+                var toast= context.resources.getString(R.string.toast3)
+
+                Toast.makeText(context,urunmap.getValue("UrunAdi").toString()+" "+toast,Toast.LENGTH_SHORT).show()
             }
 
         }

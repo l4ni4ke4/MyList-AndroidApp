@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#2B0C68"
             android:onClick="addProduct"
-            android:text="Ürün Ekle"
+            android:text="@string/ürünekle_but"
             android:textAllCaps="false"
             android:textSize="20sp" />
 
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#FF0000"
             android:onClick="deleteList"
-            android:text="Listeyi Sil"
+            android:text="@string/listeyisil_but"
             android:textAllCaps="false"
             android:textSize="20sp" />
 
@@ -56,11 +56,11 @@
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="179dp"
-        android:layout_height="31dp"
+        android:layout_width="218dp"
+        android:layout_height="32dp"
         android:layout_marginTop="2dp"
         android:paddingStart="20dp"
-        android:text="Alınan Ürünler"
+        android:text="@string/alinanürünler"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"

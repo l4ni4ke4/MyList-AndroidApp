@@ -13,7 +13,7 @@
         android:layout_width="296dp"
         android:layout_height="47dp"
         android:layout_marginTop="10dp"
-        android:text="Adet / Gram "
+        android:text="@string/adet_gram"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -24,7 +24,7 @@
     <EditText
         android:id="@+id/editTextNumber30"
         android:layout_width="328dp"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:ems="10"
         android:inputType="number" />
@@ -33,7 +33,7 @@
         android:id="@+id/textView31"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:text="Not "
+        android:text="@string/not"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -54,7 +54,7 @@
         android:id="@+id/button30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kaydet"
+        android:text="@string/kaydet_but"
         app:layout_constraintEnd_toEndOf="@+id/yeniListe"
         app:layout_constraintStart_toStartOf="@+id/yeniListe"
         tools:layout_editor_absoluteY="295dp" />
