@@ -76,6 +76,7 @@ class KaloriUrunAdapter (private val productName : ArrayList<String>,private val
                             val intent = Intent(context, KaloriHesaplayici::class.java)
                             //intent.putExtra("textToSend",textToSend)
                             selectedItemsList.add(textToSend)
+                            (context as Activity).finish()
                             context.startActivity(intent)
                         }
 
