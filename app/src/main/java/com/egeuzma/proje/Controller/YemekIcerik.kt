@@ -9,6 +9,7 @@ import com.egeuzma.proje.R
 import com.egeuzma.proje.model.Database
 import com.egeuzma.proje.model.YemekTarif
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_yemek_icerik.*
 
 class YemekIcerik : AppCompatActivity() {
@@ -30,10 +31,15 @@ class YemekIcerik : AppCompatActivity() {
         db.collection("YemekTarifleri").whereEqualTo("isim",selectedTarif).get().addOnSuccessListener { documents ->
             for (document in documents){
                 val tarif = document.get("tarif") as String
+                val imageUrl = document.get("url") as String
                 textView17.text=tarif
+                Picasso.get().load(imageUrl).into(imageView)
             }
         }
     }
+
+
+
     fun addMalzeme(view: View){
         db.collection("YemekTarifleri").whereEqualTo("isim",selectedTarif).get().addOnSuccessListener { documents ->
             malzemeler.clear()
