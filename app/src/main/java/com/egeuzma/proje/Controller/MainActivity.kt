@@ -15,6 +15,7 @@ import com.egeuzma.proje.R
 import com.egeuzma.proje.RecyclerAdapter
 import com.egeuzma.proje.model.Database
 import com.egeuzma.proje.model.Liste
+import com.egeuzma.proje.model.YemekTarif
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_liste_icerik.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,9 +35,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         button2.isEnabled= false
         db = FirebaseFirestore.getInstance()
-        var deneme = Database()
+        getData()
         //var Language = Locale.getDefault().getLanguage()
-        deneme.getListData(object :MyCallBack{
+
+    }
+    fun getData(){
+        var database = Database()
+        database.getListData(object :MyCallBack{
             override fun onCallback(value: ArrayList<Liste>) {
                 lists=value
                 for (liste in lists){
@@ -47,9 +52,12 @@ class MainActivity : AppCompatActivity() {
                 adapter = RecyclerAdapter(lists)
                 recyclerView3.adapter = adapter
             }
+
+            override fun onCallbackYemek(value: ArrayList<YemekTarif>) {
+                TODO("Not yet implemented")
+            }
         })
     }
-
     fun goToYemekTarif(view :View){
         val intent = Intent(applicationContext,
             YemekTarifleri::class.java)

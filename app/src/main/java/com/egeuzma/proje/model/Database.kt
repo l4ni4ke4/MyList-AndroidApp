@@ -26,5 +26,25 @@ class Database {
                  }
          }
     }
+    fun getRecipes(callback: MyCallBack){
+        var tarifler =ArrayList<YemekTarif>()
+        db.collection("YemekTarifleri").addSnapshotListener { snapshot, exception ->
+                if(snapshot!=null){
+                    if(!snapshot.isEmpty){
+                        val documents = snapshot.documents
+                        for (document in documents){
+                            val isim = document.get("isim") as String
+                            val malzeme = document.get("malzemeler") as ArrayList<String>
+                            val recept = document.get("tarif") as String
+                            // val recept2 =document.get("tarif2") as String
+                            var myTarif = YemekTarif(isim, malzeme, recept!!)
+                            tarifler.add(myTarif)
+                        }
+                        callback.onCallbackYemek(tarifler)
+                    }
+                }
+
+        }
+    }
 }
 
