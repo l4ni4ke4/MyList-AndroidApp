@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.RecyclerAdapter
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_urun_ekleme.*
 import javax.security.auth.callback.Callback
 
 class Database {
@@ -42,6 +43,24 @@ class Database {
                         }
                         callback.onCallback(tarifler)
                     }
+                }
+
+        }
+    }
+
+    fun getProducts(myCallBack: MyCallBack){
+        var productsName = ArrayList<Any>()
+        db.collection("Urunler").addSnapshotListener { snapshot, exception ->
+            if(snapshot!=null){
+                if (!snapshot.isEmpty){
+                    productsName.clear()
+                    val documents = snapshot.documents
+                    for (document in documents){
+                        val isim = document.get("Name") as String
+                        productsName.add(isim)
+                        }
+                    }
+                myCallBack.onCallback(productsName)
                 }
 
         }
