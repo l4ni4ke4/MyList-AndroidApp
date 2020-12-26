@@ -10,7 +10,7 @@ import javax.security.auth.callback.Callback
 class Database {
     private  var  db = FirebaseFirestore.getInstance()
      fun getListData(callback:MyCallBack){
-         var lists = ArrayList<Liste>()
+         var lists = ArrayList<Any>()
          db.collection("Listeler").addSnapshotListener { snapshot, exception ->
                  if(snapshot!=null){
                      if (!snapshot.isEmpty){
@@ -27,7 +27,7 @@ class Database {
          }
     }
     fun getRecipes(callback: MyCallBack){
-        var tarifler =ArrayList<YemekTarif>()
+        var tarifler =ArrayList<Any>()
         db.collection("YemekTarifleri").addSnapshotListener { snapshot, exception ->
                 if(snapshot!=null){
                     if(!snapshot.isEmpty){
@@ -40,7 +40,7 @@ class Database {
                             var myTarif = YemekTarif(isim, malzeme, recept!!)
                             tarifler.add(myTarif)
                         }
-                        callback.onCallbackYemek(tarifler)
+                        callback.onCallback(tarifler)
                     }
                 }
 

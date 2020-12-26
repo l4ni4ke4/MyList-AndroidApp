@@ -41,20 +41,17 @@ class MainActivity : AppCompatActivity() {
     }
     fun getData(){
         var database = Database()
-        database.getListData(object :MyCallBack{
-            override fun onCallback(value: ArrayList<Liste>) {
-                lists=value
-                for (liste in lists){
+        database.getListData(object :MyCallBack {
+            override fun onCallback(value: ArrayList<Any>) {
+                lists.clear()
+                lists = value as ArrayList<Liste>
+                for (liste in lists) {
                     listName.add(liste.isim!!)
                 }
                 var layoutManager = LinearLayoutManager(this@MainActivity)
                 recyclerView3.layoutManager = layoutManager
                 adapter = RecyclerAdapter(lists)
                 recyclerView3.adapter = adapter
-            }
-
-            override fun onCallbackYemek(value: ArrayList<YemekTarif>) {
-                TODO("Not yet implemented")
             }
         })
     }
@@ -83,7 +80,6 @@ class MainActivity : AppCompatActivity() {
                val map = HashMap<String,Any>()
                map.put("isim",edittext.text.toString())
                map.put("Urunler",malzeme)
-               println(edittext.text)
                if(listName.contains(edittext.text.toString())){
                    textview.text=resources.getString(R.string.toast1)
                }else{
@@ -97,4 +93,9 @@ class MainActivity : AppCompatActivity() {
            }
        })
    }
+
+    override fun onResume() {
+        getData()
+        super.onResume()
+    }
 }

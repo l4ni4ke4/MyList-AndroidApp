@@ -30,11 +30,9 @@ class YemekTarifleri : AppCompatActivity() {
     fun getData(){
         var database = Database()
         database.getRecipes(object : MyCallBack {
-            override fun onCallback(value: ArrayList<Liste>) {
-                TODO("Not yet implemented")
-            }
-            override fun onCallbackYemek(value: ArrayList<YemekTarif>) {
-                tarifler=value
+            override fun onCallback(value: ArrayList<Any>) {
+                tarifler.clear()
+                tarifler = value as ArrayList<YemekTarif>
                 var layoutManager = LinearLayoutManager(this@YemekTarifleri)
                 recyclerView2.layoutManager = layoutManager
                 adapter = TarifAdapter(tarifler)
