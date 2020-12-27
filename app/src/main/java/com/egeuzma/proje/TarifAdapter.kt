@@ -33,8 +33,6 @@ class TarifAdapter (private val tarifname :ArrayList<YemekTarif>): RecyclerView.
     override fun onBindViewHolder(holder: TarifAdapter.TarifHolder, position: Int) {
         holder.recyclerText?.text=tarifname[position].isim
         holder.itemView.setOnClickListener {
-            // println("tıklandı")
-            // println(listname[position])
             val context=holder.recyclerText?.context
             val intent = Intent( context, YemekIcerik::class.java)
             intent.putExtra("isim",tarifname[position])

@@ -24,17 +24,8 @@ class YemekIcerik : AppCompatActivity() {
         val intent = intent
         val selectedRecept = intent.getSerializableExtra("isim") as YemekTarif
         selectedTarif = selectedRecept.isim
-        getReceptFromFirebase(selectedTarif!!)
-    }
-    fun getReceptFromFirebase(selectedTarif :String){
-        db.collection("YemekTarifleri").whereEqualTo("isim",selectedTarif).get().addOnSuccessListener { documents ->
-            for (document in documents){
-                val tarif = document.get("tarif") as String
-                val imageUrl = document.get("url") as String
-                textView17.text=tarif
-                Picasso.get().load(imageUrl).into(imageView)
-            }
-        }
+        var database=Database()
+        database.getReceptFromFirebase(selectedTarif!!,textView17,imageView)
     }
     fun addMalzeme(view: View){
         var database = Database()
