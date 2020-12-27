@@ -37,8 +37,28 @@ class YemekIcerik : AppCompatActivity() {
         }
     }
     fun addMalzeme(view: View){
-        var database = Database()
-        database.makeSelectedRecipesToList(selectedTarif!!)
+        db.collection("YemekTarifleri").whereEqualTo("isim",selectedTarif).get().addOnSuccessListener { documents ->
+            malzemeler.clear()
+            for (document in documents){
+                malzemeler = document.get("malzemeler") as ArrayList<String>
+            }
+            for(malzeme in malzemeler){
+                val map = HashMap<String,Any>()
+                map.put("UrunAdi",malzeme)
+                map.put("UrunAdeti","0")
+                map.put("UrunNotu","")
+                map.put("isCheck",false)
+                products.add(map)
+            }
+            val listmap = hashMapOf<String,Any>()
+            val isim=selectedTarif + " Listesi"
+            listmap.put("isim",isim)
+            listmap.put("Urunler",products)
+            addListToDatabase(listmap,isim)
+        }
+    }
+    fun  addListToDatabase (listmap : HashMap<String,Any>,isim:String){
+        db.collection("Listeler").document(isim).set(listmap)
         val intent = Intent(applicationContext,MainActivity::class.java)
         startActivity(intent)
         finish()

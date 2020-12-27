@@ -70,24 +70,36 @@ class UrunDetayi : AppCompatActivity() {
         })
     }
     fun deleteProduct(view: View){
-        var lists :ArrayList<Liste>
-        var database = Database()
-        database.getSelectedList(object:MyCallBack{
-            override fun onCallback(value: ArrayList<Any>) {
-                lists = value as ArrayList<Liste>
-                deneme = lists[0].malzeme
-                deneme1=deneme.clone() as ArrayList<HashMap<String, Any>>
-                for (x in deneme){
-                    if(x.getValue("UrunAdi").toString()==textView9.text){
-                        deneme1.remove(x)
-                        val listmap = hashMapOf<String,Any>()
-                        listmap.put("isim", liste!!)
-                        listmap.put("Urunler",deneme1)
-                        addDatabase(listmap,liste!!)
+        db.collection("Listeler").whereEqualTo("isim",liste).addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                Toast.makeText(
+                    applicationContext,
+                    exception.localizedMessage.toString(),
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                if (snapshot != null) {
+                    if (!snapshot.isEmpty) {
+                        val documents = snapshot.documents
+                        for (document in documents) {
+                            deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
+                            deneme1 = deneme.clone() as ArrayList<HashMap<String, Any>>
+                            for (x in deneme){
+                                if(x.getValue("UrunAdi").toString()==textView9.text){
+                                    deneme1.remove(x)
+                                    val listmap = hashMapOf<String,Any>()
+                                    listmap.put("isim", liste!!)
+                                    listmap.put("Urunler",deneme1)
+                                    addDatabase(listmap,liste!!)
+
+                                }
+                            }
+                        }
                     }
                 }
+
             }
-        },liste!!)
+        }
     }
     fun addDatabase(listmap : HashMap<String,Any>,isim:String){
         db.collection("Listeler").document(isim).set(listmap)
@@ -102,29 +114,6 @@ class UrunDetayi : AppCompatActivity() {
         var count =0
         var lists :ArrayList<Liste>
         var database = Database()
-      /* database.getSelectedList(object:MyCallBack{
-            override fun onCallback(value: ArrayList<Any>) {
-                lists = value as ArrayList<Liste>
-                deneme = lists[0].malzeme
-                deneme1=deneme.clone() as ArrayList<HashMap<String, Any>>
-                for (x in deneme) {
-                    if (x.getValue("UrunAdi").toString() == textView9.text) {
-                        x.put("UrunAdi", textView9.text.toString())
-                        x.put("UrunAdeti", textView11.text.toString())
-                        x.put("UrunNotu", textView12.text.toString())
-                        println(deneme1.indexOf(x))
-                        println(deneme)
-                        deneme1.set(deneme1.indexOf(x), x)
-                        val listmap = hashMapOf<String, Any>()
-                        listmap.put("Urunler", deneme1)
-                        listmap.put("isim", liste!!)
-                       // println(listmap)
-                        addDatabase(listmap, liste!!)
-                    }
-                }
-            }
-
-        },liste!!)*/
       db.collection("Listeler").whereEqualTo("isim", liste).get().addOnSuccessListener { documents ->
           for (document in documents) {
               deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
