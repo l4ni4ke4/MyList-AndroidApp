@@ -71,33 +71,23 @@ class UrunDetayi : AppCompatActivity() {
     }
     fun deleteProduct(view: View){
         db.collection("Listeler").whereEqualTo("isim",liste).addSnapshotListener { snapshot, exception ->
-            if (exception != null) {
-                Toast.makeText(
-                    applicationContext,
-                    exception.localizedMessage.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
-            } else {
-                if (snapshot != null) {
-                    if (!snapshot.isEmpty) {
-                        val documents = snapshot.documents
-                        for (document in documents) {
-                            deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
-                            deneme1 = deneme.clone() as ArrayList<HashMap<String, Any>>
-                            for (x in deneme){
-                                if(x.getValue("UrunAdi").toString()==textView9.text){
-                                    deneme1.remove(x)
-                                    val listmap = hashMapOf<String,Any>()
-                                    listmap.put("isim", liste!!)
-                                    listmap.put("Urunler",deneme1)
-                                    addDatabase(listmap,liste!!)
-
-                                }
+            if (snapshot != null) {
+                if (!snapshot.isEmpty) {
+                    val documents = snapshot.documents
+                    for (document in documents) {
+                        deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
+                        deneme1 = deneme.clone() as ArrayList<HashMap<String, Any>>
+                        for (x in deneme){
+                            if(x.getValue("UrunAdi").toString()==textView9.text){
+                                deneme1.remove(x)
+                                val listmap = hashMapOf<String,Any>()
+                                listmap.put("isim", liste!!)
+                                listmap.put("Urunler",deneme1)
+                                addDatabase(listmap,liste!!)
                             }
                         }
                     }
                 }
-
             }
         }
     }

@@ -81,5 +81,28 @@ class Database {
             }
         }
     }
+    fun makeSelectedRecipesToList(selectedRecipe:String){
+        var products: ArrayList<HashMap<String,Any>> = ArrayList()
+        var malzemeler : ArrayList<String> = ArrayList()
+        db.collection("YemekTarifleri").whereEqualTo("isim",selectedRecipe).get().addOnSuccessListener { documents ->
+            malzemeler.clear()
+            for (document in documents){
+                malzemeler = document.get("malzemeler") as ArrayList<String>
+            }
+            for(malzeme in malzemeler){
+                val map = HashMap<String,Any>()
+                map.put("UrunAdi",malzeme)
+                map.put("UrunAdeti","0")
+                map.put("UrunNotu","")
+                map.put("isCheck",false)
+                products.add(map)
+            }
+            val listmap = hashMapOf<String,Any>()
+            val isim=selectedRecipe + " Listesi"
+            listmap.put("isim",isim)
+            listmap.put("Urunler",products)
+            db.collection("Listeler").document(isim).set(listmap)
+        }
+    }
 }
 
