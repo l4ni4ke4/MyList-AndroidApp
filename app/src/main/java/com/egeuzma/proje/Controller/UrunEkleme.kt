@@ -99,28 +99,19 @@ class UrunEkleme : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     fun getCategory(kategori:String) {
-        db.collection("Urunler").whereEqualTo("Category", kategori)
-            .addSnapshotListener { snapshot, exception ->
-                if (exception != null) {
-                    Toast.makeText(
-                        applicationContext,
-                        exception.localizedMessage.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    if (snapshot != null) {
-                        if (!snapshot.isEmpty) {
-                            productsName.clear()
-                            val documents = snapshot.documents
-                            for (document in documents) {
-                                val isim = document.get("Name") as String
-                                productsName.add(isim)
-                                adapter!!.notifyDataSetChanged()
-                            }
-                        }
+        db.collection("Urunler").whereEqualTo("Category", kategori).addSnapshotListener { snapshot, exception ->
+            if (snapshot != null) {
+                if (!snapshot.isEmpty) {
+                    productsName.clear()
+                    val documents = snapshot.documents
+                    for (document in documents) {
+                        val isim = document.get("Name") as String
+                        productsName.add(isim)
+                        adapter!!.notifyDataSetChanged()
                     }
                 }
             }
+        }
     }
 
     fun getProducts(){

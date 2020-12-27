@@ -21,7 +21,6 @@ class YemekIcerik : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_yemek_icerik)
         db = FirebaseFirestore.getInstance()
-
         val intent = intent
         val selectedRecept = intent.getSerializableExtra("isim") as YemekTarif
         selectedTarif = selectedRecept.isim
@@ -37,32 +36,9 @@ class YemekIcerik : AppCompatActivity() {
             }
         }
     }
-
-
-
     fun addMalzeme(view: View){
-        db.collection("YemekTarifleri").whereEqualTo("isim",selectedTarif).get().addOnSuccessListener { documents ->
-            malzemeler.clear()
-            for (document in documents){
-                    malzemeler = document.get("malzemeler") as ArrayList<String>
-            }
-            for(malzeme in malzemeler){
-                val map = HashMap<String,Any>()
-                map.put("UrunAdi",malzeme)
-                map.put("UrunAdeti","0")
-                map.put("UrunNotu","")
-                map.put("isCheck",false)
-                products.add(map)
-            }
-            val listmap = hashMapOf<String,Any>()
-            val isim=selectedTarif + " Listesi"
-            listmap.put("isim",isim)
-            listmap.put("Urunler",products)
-            addListToDatabase(listmap,isim)
-        }
-    }
-    fun  addListToDatabase (listmap : HashMap<String,Any>,isim:String){
-        db.collection("Listeler").document(isim).set(listmap)
+        var database = Database()
+        database.makeSelectedRecipesToList(selectedTarif!!)
         val intent = Intent(applicationContext,MainActivity::class.java)
         startActivity(intent)
         finish()
