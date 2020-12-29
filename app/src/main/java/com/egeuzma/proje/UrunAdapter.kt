@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.Controller.ListeIcerik
+import com.egeuzma.proje.model.Database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.rpc.context.AttributeContext
 import kotlinx.android.synthetic.main.urun_ekleme_dialog.*
@@ -42,6 +43,7 @@ class UrunAdapter (private val productname :ArrayList<String>,private val isim:S
 
     override fun onBindViewHolder(holder: UrunHolder, position: Int) {
         holder.recyclerText?.text = productname[position]
+        var database=Database()
         holder.itemView.setOnClickListener {
             var dialog = Dialog(holder.recyclerText?.context!!)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -52,40 +54,11 @@ class UrunAdapter (private val productname :ArrayList<String>,private val isim:S
                 map.put("UrunAdeti",dialog.editTextNumber30.text.toString())
                 map.put("UrunNotu",dialog.editTextTextMultiLine30.text.toString())
                 map.put("isCheck",false)
-                addProductToList(holder.recyclerText?.context!!,map)
+                database.addProductToList(holder.recyclerText?.context!!,map,isim)
                 dialog.cancel()
             }
             dialog.show()
 
         }
-    }
-
-    fun addProductToList(context: Context,urunmap:HashMap<String,Any>) {
-        var db = FirebaseFirestore.getInstance()
-        var products : ArrayList<HashMap<String,Any>> = ArrayList()
-        var count =0
-        db.collection("Listeler").whereEqualTo("isim",isim).get().addOnSuccessListener { documents ->
-            for (document in documents){
-                 products = document.get("Urunler") as ArrayList<HashMap<String, Any>>
-            }
-            for (product in products){
-                if (product.getValue("UrunAdi").toString()==urunmap.getValue("UrunAdi").toString()){
-                    Toast.makeText(context,R.string.toast2,Toast.LENGTH_SHORT).show()
-                    count=1
-                }
-            }
-            if(count==0){
-                products.add(urunmap)
-                val listmap = hashMapOf<String, Any>()
-                listmap.put("Urunler", products)
-                listmap.put("isim", isim)
-                db.collection("Listeler").document(isim).set(listmap)
-                var toast= context.resources.getString(R.string.toast3)
-
-                Toast.makeText(context,urunmap.getValue("UrunAdi").toString()+" "+toast,Toast.LENGTH_SHORT).show()
-            }
-
-        }
-
     }
 }

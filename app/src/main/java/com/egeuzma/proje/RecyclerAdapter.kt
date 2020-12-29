@@ -35,8 +35,6 @@ class RecyclerAdapter(private val listname :ArrayList<Liste>): RecyclerView.Adap
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
         holder.recyclerText?.text =listname[position].isim
         holder.itemView.setOnClickListener {
-           // println("tıklandı")
-           // println(listname[position])
             val context=holder.recyclerText?.context
             val intent = Intent( context, ListeIcerik::class.java)
             intent.putExtra("info","old")

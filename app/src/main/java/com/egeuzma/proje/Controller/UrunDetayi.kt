@@ -10,7 +10,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
+import com.egeuzma.proje.model.Database
+import com.egeuzma.proje.model.Liste
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_urun_detayi.*
 
@@ -18,8 +21,6 @@ class UrunDetayi : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
     private  var liste : String? = null
     private  var selectedList : String? = null
-    var deneme: ArrayList<HashMap<String,Any>> = ArrayList()
-    var deneme1: ArrayList<HashMap<String,Any>> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,39 +68,8 @@ class UrunDetayi : AppCompatActivity() {
         })
     }
     fun deleteProduct(view: View){
-        db.collection("Listeler").whereEqualTo("isim",liste).addSnapshotListener { snapshot, exception ->
-            if (exception != null) {
-                Toast.makeText(
-                    applicationContext,
-                    exception.localizedMessage.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
-            } else {
-                if (snapshot != null) {
-                    if (!snapshot.isEmpty) {
-                        val documents = snapshot.documents
-                        for (document in documents) {
-                            deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
-                            deneme1 = deneme.clone() as ArrayList<HashMap<String, Any>>
-                            for (x in deneme){
-                                if(x.getValue("UrunAdi").toString()==textView9.text){
-                                    deneme1.remove(x)
-                                    val listmap = hashMapOf<String,Any>()
-                                    listmap.put("isim", liste!!)
-                                    listmap.put("Urunler",deneme1)
-                                    addDatabase(listmap,liste!!)
-
-                                }
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-    fun addDatabase(listmap : HashMap<String,Any>,isim:String){
-        db.collection("Listeler").document(isim).set(listmap)
+        var database = Database()
+        database.deleteProduct(liste!!,textView9.text.toString())
         val intent = Intent(applicationContext,
             ListeIcerik::class.java)
         intent.putExtra("info","old")
@@ -108,28 +78,13 @@ class UrunDetayi : AppCompatActivity() {
         finish()
     }
     fun kaydet(view: View) {
-        var count = 0
-
-       db.collection("Listeler").whereEqualTo("isim", liste).get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
-                    deneme1 = deneme.clone() as ArrayList<HashMap<String, Any>>
-                    for (x in deneme) {
-                        if (x.getValue("UrunAdi").toString() == textView9.text) {
-                            x.put("UrunAdi", textView9.text.toString())
-                            x.put("UrunAdeti", textView11.text.toString())
-                            x.put("UrunNotu", textView12.text.toString())
-                            deneme1.set(count, x)
-                            val listmap = hashMapOf<String, Any>()
-                            listmap.put("Urunler", deneme1)
-                            listmap.put("isim", liste!!)
-                            println(listmap)
-                            addDatabase(listmap, liste!!)
-                        }
-                        count++
-                    }
-                }
-            }
+        var database = Database()
+        database.saveProduct(liste!!,textView9.text.toString(),textView11.text.toString(),textView12.text.toString())
+        val intent = Intent(applicationContext,
+            ListeIcerik::class.java)
+        intent.putExtra("info","old")
+        intent.putExtra("isim",liste)
+        startActivity(intent)
+        finish()
     }
 }

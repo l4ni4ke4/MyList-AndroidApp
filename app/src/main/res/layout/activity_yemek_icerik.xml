@@ -17,9 +17,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="218dp"
-            app:srcCompat="@drawable/magnolia"
-            tools:srcCompat="@drawable/magnolia" />
+            android:layout_height="218dp" />
 
         <ScrollView
             android:layout_width="match_parent"

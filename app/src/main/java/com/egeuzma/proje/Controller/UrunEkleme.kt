@@ -15,9 +15,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
+import com.egeuzma.proje.RecyclerAdapter
 import com.egeuzma.proje.UrunAdapter
+import com.egeuzma.proje.model.Database
+import com.egeuzma.proje.model.Liste
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_urun_ekleme.*
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
@@ -31,20 +36,14 @@ class UrunEkleme : AppCompatActivity() {
     var products1 :ArrayList<String> = ArrayList()
     var adapter : UrunAdapter?=null
     var productskategori :ArrayList<String> = ArrayList()
+    var isim: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_urun_ekleme)
         db = FirebaseFirestore.getInstance()
         val intent = intent
-        val isim= intent.getStringExtra("isim")
-        getProductData()
-        var layoutManager = LinearLayoutManager(this)
-
-        recyclerViewProduct.layoutManager = layoutManager
-        // adapter = RecyclerAdapter(listName)
-
-        adapter = UrunAdapter(productsName,isim!!)
-        recyclerViewProduct.adapter = adapter
+        isim= intent.getStringExtra("isim")
+        getProducts()
         recyclerViewProduct.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                var imm =  getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -86,11 +85,12 @@ class UrunEkleme : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-       if(item.title.toString()=="Tüm Ürünler"){
+       if(item.title.toString() == "Tüm Ürünler" || item.title.toString() == "All Products"){
            textView6.visibility=View.INVISIBLE
            searchView.visibility=View.VISIBLE
-           getProductData()
+           getProducts()
        }else{
+           //Kategorileri Ingilizce Eklemeyi unutmamak lazim
            textView6.visibility=View.VISIBLE
            textView6.text=item.title
            searchView.visibility=View.INVISIBLE
@@ -99,50 +99,48 @@ class UrunEkleme : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     fun getCategory(kategori:String) {
-        db.collection("Urunler").whereEqualTo("Category", kategori)
-            .addSnapshotListener { snapshot, exception ->
-                if (exception != null) {
-                    Toast.makeText(
-                        applicationContext,
-                        exception.localizedMessage.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    if (snapshot != null) {
-                        if (!snapshot.isEmpty) {
-                            productsName.clear()
-                            val documents = snapshot.documents
-                            for (document in documents) {
-                                val isim = document.get("Name") as String
-                                productsName.add(isim)
-                                adapter!!.notifyDataSetChanged()
-                            }
-                        }
-                    }
-                }
-            }
-    }
-    fun getProductData(){
-        db.collection("Urunler").addSnapshotListener { snapshot, exception ->
-            if(exception != null){
-                Toast.makeText(applicationContext,exception.localizedMessage.toString(), Toast.LENGTH_LONG).show()
-            }else{
-                if(snapshot!=null){
-                    if (!snapshot.isEmpty){
-                        productsName.clear()
-                        products.clear()
-                        products1.clear()
-                        val documents = snapshot.documents
-                        for (document in documents){
-                            val isim = document.get("Name") as String
-                            productsName.add(isim)
-                            products.add(isim)
-                            products1.add(isim)
-                            recyclerViewProduct.adapter!!.notifyDataSetChanged()
-                        }
+        db.collection("Urunler").whereEqualTo("Category", kategori).addSnapshotListener { snapshot, exception ->
+            if (snapshot != null) {
+                if (!snapshot.isEmpty) {
+                    productsName.clear()
+                    val documents = snapshot.documents
+                    for (document in documents) {
+                        val isim = document.get("Name") as String
+                        productsName.add(isim)
+                        adapter!!.notifyDataSetChanged()
                     }
                 }
             }
         }
     }
+
+    fun getProducts(){
+        var database = Database()
+        database.getProducts(object : MyCallBack {
+            override fun onCallback(value: ArrayList<Any>) {
+                productsName.clear()
+                products.clear()
+                products1.clear()
+                productsName = value as ArrayList<String>
+                for (productsname in productsName) {
+                    products.add(productsname)
+                    products1.add(productsname)
+                }
+                var layoutManager = LinearLayoutManager(this@UrunEkleme)
+                recyclerViewProduct.layoutManager = layoutManager
+                adapter = UrunAdapter(productsName,isim!!)
+                recyclerViewProduct.adapter = adapter
+            }
+
+            override fun onCallback(
+                name: ArrayList<String>,
+                number: ArrayList<String>,
+                not: ArrayList<String>,
+                check: ArrayList<Boolean>
+            ) {
+
+            }
+        })
+    }
+
 }

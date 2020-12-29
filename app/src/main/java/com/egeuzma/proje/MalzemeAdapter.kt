@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.Controller.ListeIcerik
 import com.egeuzma.proje.Controller.MainActivity
 import com.egeuzma.proje.Controller.UrunDetayi
+import com.egeuzma.proje.model.Database
 import com.egeuzma.proje.model.Liste
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.urun_ekleme_dialog.*
@@ -40,6 +41,7 @@ class MalzemeAdapter (private val productName : ArrayList<String>,private val pr
     }
 
     override fun onBindViewHolder(holder: MalzemeHolder, position: Int) {
+        var database=Database()
         holder.recyclerText?.text=productName[position]
         if(!productCheck[position]){
             holder.recyclerText?.paintFlags=Paint.ANTI_ALIAS_FLAG
@@ -58,13 +60,13 @@ class MalzemeAdapter (private val productName : ArrayList<String>,private val pr
               holder.recyclerText?.paint!!.setMaskFilter(BlurMaskFilter(10F, BlurMaskFilter.Blur.INNER))
               holder.recyclerText?.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
                map.put("isCheck",productCheck[position])
-               addProductToList(holder.recyclerText?.context!!,map,position)
+               database.addCheckedProductToList(holder.recyclerText?.context!!,map,position,liste)
            }else{
                productCheck[position]=false
                holder.recyclerText?.paintFlags=Paint.ANTI_ALIAS_FLAG
                holder.recyclerText?.paint!!.setMaskFilter(null)
                map.put("isCheck",productCheck[position])
-               addProductToList(holder.recyclerText?.context!!,map,position)
+               database.addCheckedProductToList(holder.recyclerText?.context!!,map,position,liste)
            }
         }
         holder.itemView.setOnLongClickListener {
@@ -77,22 +79,6 @@ class MalzemeAdapter (private val productName : ArrayList<String>,private val pr
             context?.startActivity(intent)
             (context as Activity).finish()
             true
-        }
-    }
-    fun addProductToList(context: Context, urunmap:HashMap<String,Any>,index: Int) {
-        var db = FirebaseFirestore.getInstance()
-
-        var products : ArrayList<HashMap<String,Any>> = ArrayList()
-        db.collection("Listeler").whereEqualTo("isim",liste).get().addOnSuccessListener { documents->
-            for(document in documents){
-                products=document.get("Urunler") as ArrayList<HashMap<String, Any>>
-            }
-            products.set(index,urunmap)
-            val listmap = hashMapOf<String, Any>()
-            listmap.put("Urunler", products)
-            listmap.put("isim", liste)
-            db.collection("Listeler").document(liste).set(listmap)
-            (context as Activity).recreate()
         }
     }
 }

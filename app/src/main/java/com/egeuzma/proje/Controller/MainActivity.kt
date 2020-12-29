@@ -10,9 +10,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
 import com.egeuzma.proje.RecyclerAdapter
+import com.egeuzma.proje.model.Database
 import com.egeuzma.proje.model.Liste
+import com.egeuzma.proje.model.YemekTarif
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_liste_icerik.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,37 +35,34 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         button2.isEnabled= false
         db = FirebaseFirestore.getInstance()
-        //var Language = Locale.getDefault().getLanguage()
         getData()
-        var layoutManager = LinearLayoutManager(this)
-        recyclerView3.layoutManager = layoutManager
-       // adapter = RecyclerAdapter(listName)
-        adapter = RecyclerAdapter(lists)
-        recyclerView3.adapter = adapter
+        //var Language = Locale.getDefault().getLanguage()
+
     }
     fun getData(){
-        db.collection("Listeler").addSnapshotListener { snapshot, exception ->
-            if(exception != null){
-                Toast.makeText(applicationContext,exception.localizedMessage.toString(), Toast.LENGTH_LONG).show()
-            }else{
-                if(snapshot!=null){
-                    if (!snapshot.isEmpty){
-                       listName.clear()
-                        lists.clear()
-                        val documents = snapshot.documents
-                        for (document in documents){
-                            val isim = document.get("isim") as String
-                            val malzeme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
-                            var myList = Liste(isim, malzeme)
-                            lists.add(myList)
-                            listName.add(isim)
-
-                            adapter!!.notifyDataSetChanged()
-                        }
-                    }
+        var database = Database()
+        database.getListData(object :MyCallBack {
+            override fun onCallback(value: ArrayList<Any>) {
+                lists.clear()
+                lists = value as ArrayList<Liste>
+                for (liste in lists) {
+                    listName.add(liste.isim!!)
                 }
+                var layoutManager = LinearLayoutManager(this@MainActivity)
+                recyclerView3.layoutManager = layoutManager
+                adapter = RecyclerAdapter(lists)
+                recyclerView3.adapter = adapter
             }
-        }
+
+            override fun onCallback(
+                name: ArrayList<String>,
+                number: ArrayList<String>,
+                not: ArrayList<String>,
+                check: ArrayList<Boolean>
+            ) {
+
+            }
+        })
     }
     fun goToYemekTarif(view :View){
         val intent = Intent(applicationContext,
@@ -89,8 +89,6 @@ class MainActivity : AppCompatActivity() {
                val map = HashMap<String,Any>()
                map.put("isim",edittext.text.toString())
                map.put("Urunler",malzeme)
-               println(edittext.text)
-               //db.collection("Listeler").document(edittext.text.toString()).set(map)
                if(listName.contains(edittext.text.toString())){
                    textview.text=resources.getString(R.string.toast1)
                }else{
@@ -104,4 +102,9 @@ class MainActivity : AppCompatActivity() {
            }
        })
    }
+
+    override fun onResume() {
+        getData()
+        super.onResume()
+    }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.text.Editable
 import android.view.MotionEvent
 import android.view.View
@@ -16,7 +17,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.egeuzma.proje.MalzemeAdapter
+import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
+import com.egeuzma.proje.model.Database
+import com.egeuzma.proje.model.Liste
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_liste_icerik.*
 import kotlinx.android.synthetic.main.activity_urun_ekleme.*
@@ -31,23 +35,19 @@ class ListeIcerik : AppCompatActivity() {
     var selectedList:String? = null
     var productNumber : ArrayList<String> = ArrayList()
     var productNote : ArrayList<String> = ArrayList()
+    var layoutManager: LinearLayoutManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_liste_icerik)
         db = FirebaseFirestore.getInstance()
         val intent = intent
         val info= intent.getStringExtra("info")
-
         if(info == "new" || info == "old"){
             selectedList=intent.getStringExtra("isim")
             textView2.text=selectedList
-            getFromFirebase(selectedList!!)
+            getSelectedListsProduct(selectedList!!)
         }
 
-        var layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
-        adapter = MalzemeAdapter(productName,productNumber,productNote,selectedList!!,productCheck)
-        recyclerView.adapter = adapter
         recyclerView.setOnTouchListener(object : View.OnTouchListener {
 
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -58,42 +58,30 @@ class ListeIcerik : AppCompatActivity() {
             }
         })
     }
-    fun getFromFirebase(selectedList :String) {
-        db.collection("Listeler").whereEqualTo("isim", selectedList)
-            .addSnapshotListener { snapshot, exception ->
-                if (exception != null) {
-                    Toast.makeText(
-                        applicationContext,
-                        exception.localizedMessage.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    if (snapshot != null) {
-                        if (!snapshot.isEmpty) {
-                            productName.clear()
-                            productNote.clear()
-                            productNumber.clear()
-                            productCheck.clear()
-                            val documents = snapshot.documents
-                            for (document in documents) {
-                                if (deneme.isEmpty()) {
-                                   // product = document.get("malzemeler") as ArrayList<String>
-                                    deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
-                                    for (x in deneme){
-                                        productName.add(x.getValue("UrunAdi") as String)
-                                        productNumber.add(x.getValue("UrunAdeti")as String)
-                                        productNote.add(x.getValue("UrunNotu")as String)
-                                        productCheck.add(x.getValue("isCheck")as Boolean)
-                                        checkedProduct(productCheck)
-                                    }
-                                }
-                                adapter!!.notifyDataSetChanged()
-                            }
-                        }
-                    }
-
-                }
+    fun getSelectedListsProduct(selectedList :String){
+        var database=Database()
+        database.getSelectedListProducts(object :MyCallBack{
+            override fun onCallback(value: ArrayList<Any>) {
             }
+            override fun onCallback(
+                name: ArrayList<String>,
+                number: ArrayList<String>,
+                not: ArrayList<String>,
+                check: ArrayList<Boolean>
+            ) {
+                productName=name
+                productNumber=number
+                productNote=not
+                productCheck=check
+                checkedProduct(productCheck)
+
+                layoutManager = LinearLayoutManager(this@ListeIcerik)
+                recyclerView.layoutManager = layoutManager
+                adapter = MalzemeAdapter(productName,productNumber,productNote,selectedList!!,productCheck)
+                recyclerView.adapter = adapter
+            }
+
+        },selectedList)
     }
     fun checkedProduct(list: ArrayList<Boolean>){
         var count=0
@@ -118,6 +106,4 @@ class ListeIcerik : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
-
 }
