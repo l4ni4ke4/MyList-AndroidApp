@@ -41,19 +41,28 @@ class Database {
              }
          }
     }
-    fun getSelectedList(callback: MyCallBack,selectedList:String){
-        var lists = ArrayList<Any>()
-        db.collection("Listeler").whereEqualTo("isim", selectedList).addSnapshotListener { snapshot, exception ->
+    fun getSelectedListProducts(callback: MyCallBack,liste: String){
+        var deneme: ArrayList<HashMap<String,Any>> = ArrayList()
+        var productName : ArrayList<String> = ArrayList()
+        var productCheck : ArrayList<Boolean> = ArrayList()
+        var productNumber : ArrayList<String> = ArrayList()
+        var productNote : ArrayList<String> = ArrayList()
+        db.collection("Listeler").whereEqualTo("isim",liste).addSnapshotListener { snapshot, exception ->
             if (snapshot != null) {
                 if (!snapshot.isEmpty) {
                     val documents = snapshot.documents
                     for (document in documents) {
-                        val isim = document.get("isim") as String
-                        val malzeme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
-                        var myList = Liste(isim, malzeme)
-                        lists.add(myList)
+                        if (deneme.isEmpty()) {
+                            deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
+                            for (x in deneme){
+                                productName.add(x.getValue("UrunAdi") as String)
+                                productNumber.add(x.getValue("UrunAdeti")as String)
+                                productNote.add(x.getValue("UrunNotu")as String)
+                                productCheck.add(x.getValue("isCheck")as Boolean)
+                            }
+                        }
                     }
-                    callback.onCallback(lists)
+                    callback.onCallback(productName,productNumber,productNote,productCheck)
                 }
             }
         }
@@ -87,6 +96,7 @@ class Database {
                     for (document in documents){
                         val isim = document.get("Name") as String
                         productsName.add(isim)
+                        //tüm ürünleri database ekledikten sonra geri kalan değerleri de çekip product klasında sakla!!!!
                     }
                 }
                 myCallBack.onCallback(productsName)

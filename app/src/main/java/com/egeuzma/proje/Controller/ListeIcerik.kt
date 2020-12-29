@@ -40,19 +40,14 @@ class ListeIcerik : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_liste_icerik)
         db = FirebaseFirestore.getInstance()
-        var database=Database()
         val intent = intent
         val info= intent.getStringExtra("info")
-
         if(info == "new" || info == "old"){
             selectedList=intent.getStringExtra("isim")
             textView2.text=selectedList
             getSelectedListsProduct(selectedList!!)
         }
-        layoutManager = LinearLayoutManager(this@ListeIcerik)
-        recyclerView.layoutManager = layoutManager
-        adapter = MalzemeAdapter(productName,productNumber,productNote,selectedList!!,productCheck)
-        recyclerView.adapter = adapter
+
         recyclerView.setOnTouchListener(object : View.OnTouchListener {
 
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -64,41 +59,29 @@ class ListeIcerik : AppCompatActivity() {
         })
     }
     fun getSelectedListsProduct(selectedList :String){
-        db.collection("Listeler").whereEqualTo("isim", selectedList)
-            .addSnapshotListener { snapshot, exception ->
-                if (exception != null) {
-                    Toast.makeText(
-                        applicationContext,
-                        exception.localizedMessage.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    if (snapshot != null) {
-                        if (!snapshot.isEmpty) {
-                            productName.clear()
-                            productNote.clear()
-                            productNumber.clear()
-                            productCheck.clear()
-                            val documents = snapshot.documents
-                            for (document in documents) {
-                                if (deneme.isEmpty()) {
-                                    // product = document.get("malzemeler") as ArrayList<String>
-                                    deneme = document.get("Urunler") as ArrayList<HashMap<String, Any>>
-                                    for (x in deneme){
-                                        productName.add(x.getValue("UrunAdi") as String)
-                                        productNumber.add(x.getValue("UrunAdeti")as String)
-                                        productNote.add(x.getValue("UrunNotu")as String)
-                                        productCheck.add(x.getValue("isCheck")as Boolean)
-                                        checkedProduct(productCheck)
-                                    }
-                                }
-                                adapter!!.notifyDataSetChanged()
-                            }
-                        }
-                    }
-
-                }
+        var database=Database()
+        database.getSelectedListProducts(object :MyCallBack{
+            override fun onCallback(value: ArrayList<Any>) {
             }
+            override fun onCallback(
+                name: ArrayList<String>,
+                number: ArrayList<String>,
+                not: ArrayList<String>,
+                check: ArrayList<Boolean>
+            ) {
+                productName=name
+                productNumber=number
+                productNote=not
+                productCheck=check
+                checkedProduct(productCheck)
+
+                layoutManager = LinearLayoutManager(this@ListeIcerik)
+                recyclerView.layoutManager = layoutManager
+                adapter = MalzemeAdapter(productName,productNumber,productNote,selectedList!!,productCheck)
+                recyclerView.adapter = adapter
+            }
+
+        },selectedList)
     }
     fun checkedProduct(list: ArrayList<Boolean>){
         var count=0

@@ -131,6 +131,15 @@ class UrunEkleme : AppCompatActivity() {
                 adapter = UrunAdapter(productsName,isim!!)
                 recyclerViewProduct.adapter = adapter
             }
+
+            override fun onCallback(
+                name: ArrayList<String>,
+                number: ArrayList<String>,
+                not: ArrayList<String>,
+                check: ArrayList<Boolean>
+            ) {
+
+            }
         })
     }
 

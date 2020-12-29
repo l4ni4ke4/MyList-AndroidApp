@@ -38,6 +38,15 @@ class YemekTarifleri : AppCompatActivity() {
                 adapter = TarifAdapter(tarifler)
                 recyclerView2.adapter = adapter
             }
+
+            override fun onCallback(
+                name: ArrayList<String>,
+                number: ArrayList<String>,
+                not: ArrayList<String>,
+                check: ArrayList<Boolean>
+            ) {
+
+            }
         })
     }
 }

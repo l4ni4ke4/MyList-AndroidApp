@@ -53,6 +53,15 @@ class MainActivity : AppCompatActivity() {
                 adapter = RecyclerAdapter(lists)
                 recyclerView3.adapter = adapter
             }
+
+            override fun onCallback(
+                name: ArrayList<String>,
+                number: ArrayList<String>,
+                not: ArrayList<String>,
+                check: ArrayList<Boolean>
+            ) {
+
+            }
         })
     }
     fun goToYemekTarif(view :View){
