@@ -14,12 +14,12 @@
     <string name="tümürünler">Tüm Ürünler</string>
     <string name="alkollü">Alkollü İçkiler ve İçecekler</string>
     <string name="alkolsüz">Alkolsüz İçecekler</string>
-    <string name="dondurma">Dondurma ve Dondurulmuş Tatlılar</string>
+    <string name="dondurma">Dondurma ve Donmuş Tatlılar</string>
     <string name="ekmek">Ekmek ve Pasta Malzemeleri</string>
     <string name="et">Et ve Balık Ürünleri</string>
     <string name="kurugıda">Kuru Gıda</string>
     <string name="meyve">Meyve ve Sebzeler</string>
-    <string name="ot">Ot ve Baharatlar</string>
+    <string name="ot">Otlar ve Baharatlar</string>
     <string name="yag">Sıvı ve Katı Yağlar</string>
     <string name="süt">Süt ve Süt Ürünleri</string>
     <string name="temizlik">Temizlik Ürünleri</string>
