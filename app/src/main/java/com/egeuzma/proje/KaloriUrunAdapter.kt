@@ -17,6 +17,7 @@ import com.egeuzma.proje.Controller.selectedItemsList
 import com.egeuzma.proje.Controller.toplamKalori
 import kotlinx.android.synthetic.main.activity_kalori_hesaplayici.view.*
 import kotlinx.android.synthetic.main.recycler_view_row.view.*
+import kotlin.math.round
 
 class KaloriUrunAdapter (private val productName : ArrayList<String>,private val productUnitCal: ArrayList
                          <Number>,private val context: Context):RecyclerView.Adapter<KaloriUrunAdapter.KaloriUrunHolder>(){
@@ -69,7 +70,8 @@ class KaloriUrunAdapter (private val productName : ArrayList<String>,private val
                             Toast.makeText(context,"Kalori bilgisi bulunamadı",Toast.LENGTH_LONG).show()
                         }else{
                             val unitcalorie = productUnitCal[position] as Double
-                            val urunCal = miktarD!! * unitcalorie
+                            var urunCal = miktarD!! * unitcalorie
+                            urunCal = round(urunCal)
                             toplamKalori += urunCal
                             val textToSend = "${productName[position]} , $miktar, kalori: $urunCal"
 
