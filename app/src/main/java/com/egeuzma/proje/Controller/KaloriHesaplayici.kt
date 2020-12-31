@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_kalori_hesaplayici.*
 import kotlinx.android.synthetic.main.activity_urun_ekleme.*
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.round
 
 var selectedItemsList:ArrayList<String> = ArrayList()
 var toplamKalori = 0.0
@@ -30,6 +31,7 @@ class KaloriHesaplayici : AppCompatActivity() {
 
     private lateinit var  db : FirebaseFirestore
 
+    var productList : ArrayList<Product> = ArrayList()
     var productsName : ArrayList<String> = ArrayList()
     var productsCalorie :ArrayList<Number> = ArrayList()
     var products1 :ArrayList<String> = ArrayList()
@@ -141,13 +143,23 @@ class KaloriHesaplayici : AppCompatActivity() {
 
     }
 
-
     fun verileriFirestoredanCekme(){
         var database = Database()
-        var products = ArrayList<Product>()
+        productsName.clear()
+        products1.clear()
         database.getProducts(object :MyCallBack{
             override fun onCallback(value: ArrayList<Any>) {
-                products=value as ArrayList<Product>
+                productList=value as ArrayList<Product>
+                for(product in productList){
+                    var name = product.isim as String
+                    var calorie = product.calorie as Number
+                    productsName.add(name)
+                    products1.add(name)
+                    productsCalorie.add(calorie)
+                    calorie1.add(calorie)
+                    adapter!!.notifyDataSetChanged()
+
+                }
             }
 
             override fun onCallback(
@@ -160,6 +172,7 @@ class KaloriHesaplayici : AppCompatActivity() {
             }
 
         })
+        /*
         db.collection("Urunler").addSnapshotListener { snapshot, exception ->
             if(exception!=null){
                 Toast.makeText(applicationContext,exception.localizedMessage.toString(), Toast.LENGTH_LONG).show()
@@ -205,5 +218,7 @@ class KaloriHesaplayici : AppCompatActivity() {
                 }
             }
         }
+
+        */
     }
 }
