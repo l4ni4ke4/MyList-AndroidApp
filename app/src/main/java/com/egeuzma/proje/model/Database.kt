@@ -20,7 +20,10 @@ import kotlinx.android.synthetic.main.activity_liste_icerik.*
 import kotlinx.android.synthetic.main.activity_urun_detayi.*
 import kotlinx.android.synthetic.main.activity_urun_ekleme.*
 import kotlinx.android.synthetic.main.activity_yemek_icerik.*
+import java.util.*
 import javax.security.auth.callback.Callback
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class Database {
     private  var  db = FirebaseFirestore.getInstance()
@@ -87,19 +90,34 @@ class Database {
         }
     }
     fun getProducts(myCallBack: MyCallBack){
-        var productsName = ArrayList<Any>()
+        var language = Locale.getDefault().getLanguage()
+        var isim :String?=null
+        var category:String?=null
+        var products = ArrayList<Any>()
         db.collection("Urunler").addSnapshotListener { snapshot, exception ->
             if(snapshot!=null){
                 if (!snapshot.isEmpty){
-                    productsName.clear()
+                    products.clear()
                     val documents = snapshot.documents
                     for (document in documents){
-                        val isim = document.get("Name") as String
-                        productsName.add(isim)
+                        if(language=="tr"){
+                            isim = document.get("Name") as String
+                            category=document.get("Category") as String
+                        }else{
+                            isim = document.get("Name_en") as String?
+                            category=document.get("Category_en") as String?
+                        }
+                        val unit_type=document.get("Unit_type") as String
+                        val unit_calorie=document.get("Unit_calorie") as Number
+                        println(isim)
+                        println(category)
+                        var product =Product(isim!!,unit_type,category!!,unit_calorie)
+
+                        products.add(product)
                         //tüm ürünleri database ekledikten sonra geri kalan değerleri de çekip product klasında sakla!!!!
                     }
                 }
-                myCallBack.onCallback(productsName)
+                myCallBack.onCallback(products)
             }
         }
     }

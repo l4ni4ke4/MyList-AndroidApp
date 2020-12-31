@@ -21,6 +21,7 @@ import com.egeuzma.proje.RecyclerAdapter
 import com.egeuzma.proje.UrunAdapter
 import com.egeuzma.proje.model.Database
 import com.egeuzma.proje.model.Liste
+import com.egeuzma.proje.model.Product
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_urun_ekleme.*
@@ -32,10 +33,10 @@ import kotlin.collections.ArrayList
 class UrunEkleme : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
     var productsName : ArrayList<String> = ArrayList()
+    var product : ArrayList<Product> = ArrayList()
     var products :ArrayList<String> = ArrayList()
     var products1 :ArrayList<String> = ArrayList()
     var adapter : UrunAdapter?=null
-    var productskategori :ArrayList<String> = ArrayList()
     var isim: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +91,6 @@ class UrunEkleme : AppCompatActivity() {
            searchView.visibility=View.VISIBLE
            getProducts()
        }else{
-           //Kategorileri Ingilizce Eklemeyi unutmamak lazim
            textView6.visibility=View.VISIBLE
            textView6.text=item.title
            searchView.visibility=View.INVISIBLE
@@ -99,19 +99,37 @@ class UrunEkleme : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     fun getCategory(kategori:String) {
-        db.collection("Urunler").whereEqualTo("Category", kategori).addSnapshotListener { snapshot, exception ->
-            if (snapshot != null) {
-                if (!snapshot.isEmpty) {
-                    productsName.clear()
-                    val documents = snapshot.documents
-                    for (document in documents) {
-                        val isim = document.get("Name") as String
-                        productsName.add(isim)
-                        adapter!!.notifyDataSetChanged()
+        var language = Locale.getDefault().getLanguage()
+        if(language=="tr"){
+            db.collection("Urunler").whereEqualTo("Category", kategori).addSnapshotListener { snapshot, exception ->
+                if (snapshot != null) {
+                    if (!snapshot.isEmpty) {
+                        productsName.clear()
+                        val documents = snapshot.documents
+                        for (document in documents) {
+                            val isim = document.get("Name") as String
+                            productsName.add(isim)
+                            adapter!!.notifyDataSetChanged()
+                        }
+                    }
+                }
+            }
+        }else{
+            db.collection("Urunler").whereEqualTo("Category_en", kategori).addSnapshotListener { snapshot, exception ->
+                if (snapshot != null) {
+                    if (!snapshot.isEmpty) {
+                        productsName.clear()
+                        val documents = snapshot.documents
+                        for (document in documents) {
+                            val isim = document.get("Name_en") as String
+                            productsName.add(isim)
+                            adapter!!.notifyDataSetChanged()
+                        }
                     }
                 }
             }
         }
+
     }
 
     fun getProducts(){
@@ -121,10 +139,11 @@ class UrunEkleme : AppCompatActivity() {
                 productsName.clear()
                 products.clear()
                 products1.clear()
-                productsName = value as ArrayList<String>
-                for (productsname in productsName) {
-                    products.add(productsname)
-                    products1.add(productsname)
+                product = value as ArrayList<Product>
+                for (ürün in product) {
+                    products.add(ürün.isim!!)
+                    products1.add(ürün.isim!!)
+                    productsName.add(ürün.isim!!)
                 }
                 var layoutManager = LinearLayoutManager(this@UrunEkleme)
                 recyclerViewProduct.layoutManager = layoutManager

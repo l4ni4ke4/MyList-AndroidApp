@@ -16,11 +16,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.Controller.ListeIcerik
 import com.egeuzma.proje.model.Database
+import com.egeuzma.proje.model.Product
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.rpc.context.AttributeContext
 import kotlinx.android.synthetic.main.urun_ekleme_dialog.*
 
-class UrunAdapter (private val productname :ArrayList<String>,private val isim:String): RecyclerView.Adapter<UrunAdapter.UrunHolder>() {
+class UrunAdapter (private val product :ArrayList<String>,private val isim:String): RecyclerView.Adapter<UrunAdapter.UrunHolder>() {
 
 
     class UrunHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -38,11 +39,11 @@ class UrunAdapter (private val productname :ArrayList<String>,private val isim:S
     }
 
     override fun getItemCount(): Int {
-        return productname.count()
+        return product.count()
     }
 
     override fun onBindViewHolder(holder: UrunHolder, position: Int) {
-        holder.recyclerText?.text = productname[position]
+        holder.recyclerText?.text = product[position]
         var database=Database()
         holder.itemView.setOnClickListener {
             var dialog = Dialog(holder.recyclerText?.context!!)
@@ -50,7 +51,7 @@ class UrunAdapter (private val productname :ArrayList<String>,private val isim:S
             dialog.setContentView(R.layout.urun_ekleme_dialog)
             dialog.button30.setOnClickListener {
                 val map = HashMap<String,Any>()
-                map.put("UrunAdi",productname[position])
+                map.put("UrunAdi",product[position])
                 map.put("UrunAdeti",dialog.editTextNumber30.text.toString())
                 map.put("UrunNotu",dialog.editTextTextMultiLine30.text.toString())
                 map.put("isCheck",false)

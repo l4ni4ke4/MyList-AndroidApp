@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         button2.isEnabled= false
         db = FirebaseFirestore.getInstance()
         getData()
-        //var Language = Locale.getDefault().getLanguage()
+
 
     }
     fun getData(){
