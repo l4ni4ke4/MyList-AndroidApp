@@ -104,17 +104,15 @@ class Database {
                             isim = document.get("Name") as String
                             category=document.get("Category") as String
                         }else{
-                            isim = document.get("Name_en") as String?
-                            category=document.get("Category_en") as String?
+                            isim = document.get("Name_en") as String
+                            category=document.get("Category_en") as String
                         }
                         val unit_type=document.get("Unit_type") as String
                         val unit_calorie=document.get("Unit_calorie") as Number
                         println(isim)
                         println(category)
                         var product =Product(isim!!,unit_type,category!!,unit_calorie)
-
                         products.add(product)
-                        //tüm ürünleri database ekledikten sonra geri kalan değerleri de çekip product klasında sakla!!!!
                     }
                 }
                 myCallBack.onCallback(products)

@@ -12,7 +12,10 @@ import android.view.View.inflate
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.egeuzma.proje.KaloriUrunAdapter
+import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
+import com.egeuzma.proje.model.Database
+import com.egeuzma.proje.model.Product
 import com.google.api.Distribution
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_kalori_hesaplayici.*
@@ -140,6 +143,23 @@ class KaloriHesaplayici : AppCompatActivity() {
 
 
     fun verileriFirestoredanCekme(){
+        var database = Database()
+        var products = ArrayList<Product>()
+        database.getProducts(object :MyCallBack{
+            override fun onCallback(value: ArrayList<Any>) {
+                products=value as ArrayList<Product>
+            }
+
+            override fun onCallback(
+                name: ArrayList<String>,
+                number: ArrayList<String>,
+                not: ArrayList<String>,
+                check: ArrayList<Boolean>
+            ) {
+                //bir şey gerek yok
+            }
+
+        })
         db.collection("Urunler").addSnapshotListener { snapshot, exception ->
             if(exception!=null){
                 Toast.makeText(applicationContext,exception.localizedMessage.toString(), Toast.LENGTH_LONG).show()
