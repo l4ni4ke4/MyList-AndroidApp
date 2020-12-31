@@ -13,4 +13,5 @@
     <item android:id="@+id/item11" android:title="@string/yag"></item>
     <item android:id="@+id/item5" android:title="@string/süt"></item>
     <item android:id="@+id/item8" android:title="@string/temizlik"></item>
+    <item android:id="@+id/item30" android:title="@string/diğer"></item>
 </menu>

@@ -41,4 +41,5 @@
     <string name="toast1">The list with this name already exists. Enter another name.</string>
     <string name="toast2">This product is already on the list.</string>
     <string name="toast3">added to the list</string>
+    <string name="diğer">Others</string>
 </resources>
