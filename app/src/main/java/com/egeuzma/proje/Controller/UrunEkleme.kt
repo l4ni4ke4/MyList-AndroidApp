@@ -145,6 +145,7 @@ class UrunEkleme : AppCompatActivity() {
                     products1.add(ürün.isim!!)
                     productsName.add(ürün.isim!!)
                 }
+                productsName.sort()
                 var layoutManager = LinearLayoutManager(this@UrunEkleme)
                 recyclerViewProduct.layoutManager = layoutManager
                 adapter = UrunAdapter(productsName,isim!!)
