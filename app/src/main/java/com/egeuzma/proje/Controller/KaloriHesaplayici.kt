@@ -77,7 +77,7 @@ class KaloriHesaplayici : AppCompatActivity() {
 
 
         println(toplamKalori)
-        textView23.text=resources.getString(R.string.toplamkalori)+"="+ toplamKalori
+        textView23.text=resources.getString(R.string.toplamkalori)+" = "+ toplamKalori
         searchView2.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true

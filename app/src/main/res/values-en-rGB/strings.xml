@@ -32,6 +32,13 @@
     <string name="toplamkalori">Total Calories</string>
     <string name="temizle">Clean</string>
     <string name="ev">Home</string>
+    <string name="eklenecekMik">Enter the amount you want to add</string>
+    <string name="gecersizSayi">The number you entered is invalid</string>
+    <string name="kaloriBilgisiBulunamadi">Calorie information not found</string>
+    <string name="kaloriYazisi">calorie</string>
+    <string name="miktar_giriniz">Add amount</string>
+    <string name="ekle">Add</string>
+    <string name="iptal">Cancel</string>
     <string name="ürünadı">PRODUCT NAME</string>
     <string name="arama">Search or add products</string>
     <string name="adetgir">Enter Pieces / Gram</string>

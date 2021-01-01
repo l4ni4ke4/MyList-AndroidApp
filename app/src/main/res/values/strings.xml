@@ -30,6 +30,13 @@
     <string name="toplamkalori">Toplam Kalori</string>
     <string name="temizle">Temizle</string>
     <string name="ev">Ev</string>
+    <string name="eklenecekMik">Eklemek istediğiniz miktarı girin</string>
+    <string name="gecersizSayi">Girdiğiniz sayı geçersiz</string>
+    <string name="kaloriBilgisiBulunamadi">Kalori bilgisi bulunamadı</string>
+    <string name="kaloriYazisi">kalori</string>
+    <string name="miktar_giriniz">Miktar giriniz</string>
+    <string name="ekle">Ekle</string>
+    <string name="iptal">İptal</string>
     <string name="çerez">Çerezler</string>
     <string name="not">NOT</string>
     <string name="ürünadı">ÜRÜN ADI</string>
