@@ -18,13 +18,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_yemek_tarifleri.*
 
 class YemekTarifleri : AppCompatActivity() {
-    private lateinit var  db : FirebaseFirestore
     var tarifler : ArrayList<YemekTarif> = ArrayList()
     var adapter : TarifAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_yemek_tarifleri)
-        db = FirebaseFirestore.getInstance()
         getData()
     }
     fun getData(){

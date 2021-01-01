@@ -29,8 +29,6 @@ var toplamKalori = 0.0
 
 class KaloriHesaplayici : AppCompatActivity() {
 
-    private lateinit var  db : FirebaseFirestore
-
     var productList : ArrayList<Product> = ArrayList()
     var productsName : ArrayList<String> = ArrayList()
     var productsCalorie :ArrayList<Number> = ArrayList()
@@ -43,19 +41,14 @@ class KaloriHesaplayici : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kalori_hesaplayici)
 
-
-        db = FirebaseFirestore.getInstance()
-
         verileriFirestoredanCekme()
 
         var layoutManager = LinearLayoutManager(this)
         searchResultRecyclerView.layoutManager = layoutManager
-
         adapter = KaloriUrunAdapter(productsName,productsCalorie,this)
         searchResultRecyclerView.adapter =adapter
 
         val refreshBtn = findViewById<Button>(R.id.calRefresh)
-
         refreshBtn.setOnClickListener{
             refreshProducts()
             val intent = intent
@@ -67,22 +60,16 @@ class KaloriHesaplayici : AppCompatActivity() {
             finish()
             goToHome()
         }
-
        // val itemViewText = intent.getStringExtra("textToSend")
         var itemsLayout : LinearLayout = findViewById(R.id.kalori_item_layout)
-
         createDisplayItems(itemsLayout)
-
       //  createDisplayItems(itemViewText?:"",itemsLayout)
-
-
         println(toplamKalori)
         textView23.text=resources.getString(R.string.toplamkalori)+" = "+ toplamKalori
         searchView2.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 if(newText!!.isNotEmpty()){
                     productsName.clear()
@@ -90,25 +77,20 @@ class KaloriHesaplayici : AppCompatActivity() {
                     val search = newText.toLowerCase(Locale.getDefault())
                     products1.forEach {
                         if(it.toLowerCase(Locale.getDefault()).contains(search)){
-
                             productsCalorie.add(calorie1.get(products1.indexOf(it)))
                             productsName.add(it)
-
                         }
                         searchResultRecyclerView.adapter!!.notifyDataSetChanged()
                     }
-
                 }else{
                     productsName.clear()
                     productsName.addAll(products1)
                     productsCalorie.clear()
                     productsCalorie.addAll(calorie1)
-
                     searchResultRecyclerView.adapter!!.notifyDataSetChanged()
                 }
                 return true
             }
-
         })
     }
 
@@ -126,7 +108,6 @@ class KaloriHesaplayici : AppCompatActivity() {
         val itemRowText: TextView = itemRowView.findViewById(R.id.kal_item_row)
         itemRowText.text = inputText
         itemsLayout.addView(itemRowView)
-
     }
 
     fun refreshProducts() {
@@ -136,11 +117,8 @@ class KaloriHesaplayici : AppCompatActivity() {
 
     fun goToHome()
     {
-        val intent = Intent(applicationContext,
-            MainActivity::class.java)
-
+        val intent = Intent(applicationContext,MainActivity::class.java)
         startActivity(intent)
-
     }
 
     fun verileriFirestoredanCekme(){
@@ -154,14 +132,13 @@ class KaloriHesaplayici : AppCompatActivity() {
                     var name = product.isim as String
                     var calorie = product.calorie as Number
                     productsName.add(name)
+                    productsName.sort()
                     products1.add(name)
                     productsCalorie.add(calorie)
                     calorie1.add(calorie)
                     adapter!!.notifyDataSetChanged()
-
                 }
             }
-
             override fun onCallback(
                 name: ArrayList<String>,
                 number: ArrayList<String>,
@@ -172,53 +149,5 @@ class KaloriHesaplayici : AppCompatActivity() {
             }
 
         })
-        /*
-        db.collection("Urunler").addSnapshotListener { snapshot, exception ->
-            if(exception!=null){
-                Toast.makeText(applicationContext,exception.localizedMessage.toString(), Toast.LENGTH_LONG).show()
-            }else{
-                if(snapshot!=null){
-                    if(!snapshot.isEmpty){
-
-                        productsName.clear()
-
-                        products1.clear()
-
-                        val documents = snapshot.documents
-                        for (document in documents){
-                            //val Category = document.get("Category") as String
-                            val Name = document.get("Name") as String
-                            val Unit_calorie = document.get("Unit_calorie")?: 0.0
-                            /*val Serving_calorie = document.get("Serving_calorie") as String
-                            val Serving_name = document.get("Serving_name") as String
-                            val Serving_size = document.get("Serving_size") as String
-                            val Unit_calorie = document.get("Unit_calorie") as String
-                            val Unit_type = document.get("Unit_type") as String*/
-
-                           // println(Name)
-                            productsName.add(Name)
-                            products1.add(Name)
-                            productsCalorie.add(Unit_calorie as Number)
-                            calorie1.add(Unit_calorie as Number)
-
-                            //productsCalorie.add(Unit_calorie)
-
-                            //adapter!!.notifyDataSetChanged()
-
-                            /* var myTarif = YemekTarif(
-                                isim,
-                                malzeme,
-                                recept
-                            )
-                            //tarifName.add(isim)
-                            tarifler.add(myTarif)*/
-                            adapter!!.notifyDataSetChanged()
-                        }
-                    }
-                }
-            }
-        }
-
-        */
     }
 }

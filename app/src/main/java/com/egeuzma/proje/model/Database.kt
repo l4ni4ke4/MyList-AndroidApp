@@ -71,16 +71,24 @@ class Database {
         }
     }
     fun getRecipes(callback: MyCallBack){
+        var language = Locale.getDefault().getLanguage()
         var tarifler =ArrayList<Any>()
+        var malzeme = ArrayList<String>()
+        var recept:String?=null
         db.collection("YemekTarifleri").addSnapshotListener { snapshot, exception ->
             if(snapshot!=null){
                 if(!snapshot.isEmpty){
                     val documents = snapshot.documents
                     for (document in documents){
                         val isim = document.get("isim") as String
-                        val malzeme = document.get("malzemeler") as ArrayList<String>
-                        val recept = document.get("tarif") as String
-                        // val recept2 =document.get("tarif2") as String
+                        if(language=="tr"){
+                            malzeme = document.get("malzemeler") as ArrayList<String>
+                            recept = document.get("tarif") as String
+                        }else{
+                            println("girdi")
+                            malzeme = document.get("malzemeler2") as ArrayList<String>
+                            recept = document.get("tarif2") as String
+                        }
                         var myTarif = YemekTarif(isim, malzeme, recept!!)
                         tarifler.add(myTarif)
                     }
@@ -120,12 +128,17 @@ class Database {
         }
     }
     fun makeSelectedRecipesToList(selectedRecipe:String){
+        var language = Locale.getDefault().getLanguage()
         var products: ArrayList<HashMap<String,Any>> = ArrayList()
         var malzemeler : ArrayList<String> = ArrayList()
         db.collection("YemekTarifleri").whereEqualTo("isim",selectedRecipe).get().addOnSuccessListener { documents ->
             malzemeler.clear()
             for (document in documents){
-                malzemeler = document.get("malzemeler") as ArrayList<String>
+                if(language=="tr"){
+                    malzemeler = document.get("malzemeler") as ArrayList<String>
+                }else{
+                    malzemeler = document.get("malzemeler2") as ArrayList<String>
+                }
             }
             for(malzeme in malzemeler){
                 val map = HashMap<String,Any>()
@@ -230,9 +243,15 @@ class Database {
 
     }
     fun getReceptFromFirebase(selectedTarif :String,textView17:TextView,imageView:ImageView){
+        var tarif:String?=null
+        var language = Locale.getDefault().getLanguage()
         db.collection("YemekTarifleri").whereEqualTo("isim",selectedTarif).get().addOnSuccessListener { documents ->
             for (document in documents){
-                val tarif = document.get("tarif") as String
+                if(language=="tr"){
+                    tarif = document.get("tarif") as String
+                }else{
+                    tarif = document.get("tarif2") as String
+                }
                 val imageUrl = document.get("url") as String
                 textView17.text=tarif
                 Picasso.get().load(imageUrl).into(imageView)

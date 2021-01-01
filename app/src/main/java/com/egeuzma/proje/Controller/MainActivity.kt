@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity() {
         button2.isEnabled= false
         db = FirebaseFirestore.getInstance()
         getData()
-
-
     }
     fun getData(){
         var database = Database()
