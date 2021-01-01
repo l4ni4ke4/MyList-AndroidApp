@@ -1,28 +1,18 @@
 package com.egeuzma.proje.Controller
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.inflate
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.egeuzma.proje.KaloriUrunAdapter
+import com.egeuzma.proje.adapter.KaloriUrunAdapter
 import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
 import com.egeuzma.proje.model.Database
 import com.egeuzma.proje.model.Product
-import com.google.api.Distribution
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_kalori_hesaplayici.*
-import kotlinx.android.synthetic.main.activity_urun_ekleme.*
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.round
 
 var selectedItemsList:ArrayList<String> = ArrayList()
 var toplamKalori = 0.0
@@ -45,7 +35,11 @@ class KaloriHesaplayici : AppCompatActivity() {
 
         var layoutManager = LinearLayoutManager(this)
         searchResultRecyclerView.layoutManager = layoutManager
-        adapter = KaloriUrunAdapter(productsName,productsCalorie,this)
+        adapter = KaloriUrunAdapter(
+            productsName,
+            productsCalorie,
+            this
+        )
         searchResultRecyclerView.adapter =adapter
 
         val refreshBtn = findViewById<Button>(R.id.calRefresh)

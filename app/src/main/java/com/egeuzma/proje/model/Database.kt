@@ -2,26 +2,14 @@ package com.egeuzma.proje.model
 
 import android.app.Activity
 import android.content.Context
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.egeuzma.proje.Controller.ListeIcerik
-import com.egeuzma.proje.Controller.YemekIcerik
-import com.egeuzma.proje.MalzemeAdapter
 import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
-import com.egeuzma.proje.RecyclerAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_liste_icerik.*
-import kotlinx.android.synthetic.main.activity_urun_detayi.*
-import kotlinx.android.synthetic.main.activity_urun_ekleme.*
-import kotlinx.android.synthetic.main.activity_yemek_icerik.*
 import java.util.*
-import javax.security.auth.callback.Callback
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 

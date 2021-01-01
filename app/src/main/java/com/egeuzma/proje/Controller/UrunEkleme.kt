@@ -1,8 +1,6 @@
 package com.egeuzma.proje.Controller
 
-import android.R.attr
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,23 +8,16 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
-import com.egeuzma.proje.RecyclerAdapter
-import com.egeuzma.proje.UrunAdapter
+import com.egeuzma.proje.adapter.UrunAdapter
 import com.egeuzma.proje.model.Database
-import com.egeuzma.proje.model.Liste
 import com.egeuzma.proje.model.Product
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_urun_ekleme.*
 import java.util.*
-import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.ArrayList
 
 
@@ -148,7 +139,8 @@ class UrunEkleme : AppCompatActivity() {
                 productsName.sort()
                 var layoutManager = LinearLayoutManager(this@UrunEkleme)
                 recyclerViewProduct.layoutManager = layoutManager
-                adapter = UrunAdapter(productsName,isim!!)
+                adapter =
+                    UrunAdapter(productsName, isim!!)
                 recyclerViewProduct.adapter = adapter
             }
 

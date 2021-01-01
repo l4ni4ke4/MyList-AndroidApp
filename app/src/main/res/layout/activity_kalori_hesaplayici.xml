@@ -26,6 +26,7 @@
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
         android:text="@string/ev"
+        android:background="@drawable/custom_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,7 +93,8 @@
             android:id="@+id/calRefresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/temizle" />
+            android:text="@string/temizle"
+            android:background="@drawable/custom_button"/>
 
     </LinearLayout>
 

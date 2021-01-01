@@ -1,24 +1,14 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.adapter
 
 import android.app.Dialog
-import android.content.Context
-import android.content.Intent
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.egeuzma.proje.Controller.ListeIcerik
+import com.egeuzma.proje.R
 import com.egeuzma.proje.model.Database
-import com.egeuzma.proje.model.Product
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.rpc.context.AttributeContext
 import kotlinx.android.synthetic.main.urun_ekleme_dialog.*
 
 class UrunAdapter (private val product :ArrayList<String>,private val isim:String): RecyclerView.Adapter<UrunAdapter.UrunHolder>() {

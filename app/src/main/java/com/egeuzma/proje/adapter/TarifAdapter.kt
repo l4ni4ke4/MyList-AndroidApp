@@ -1,4 +1,4 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.model.YemekTarif
 import com.egeuzma.proje.Controller.YemekIcerik
+import com.egeuzma.proje.R
 
 class TarifAdapter (private val tarifname :ArrayList<YemekTarif>): RecyclerView.Adapter<TarifAdapter.TarifHolder>() {
 
@@ -20,7 +21,7 @@ class TarifAdapter (private val tarifname :ArrayList<YemekTarif>): RecyclerView.
   }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TarifAdapter.TarifHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TarifHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view =inflater.inflate(R.layout.recycler_view_row,parent,false)
         return TarifHolder(view)
@@ -30,7 +31,7 @@ class TarifAdapter (private val tarifname :ArrayList<YemekTarif>): RecyclerView.
         return tarifname.size
     }
 
-    override fun onBindViewHolder(holder: TarifAdapter.TarifHolder, position: Int) {
+    override fun onBindViewHolder(holder: TarifHolder, position: Int) {
         holder.recyclerText?.text=tarifname[position].isim
         holder.itemView.setOnClickListener {
             val context=holder.recyclerText?.context

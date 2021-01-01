@@ -1,4 +1,4 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.adapter
 
 import android.app.Activity
 import com.egeuzma.proje.R
@@ -11,19 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import com.egeuzma.proje.Controller.ListeIcerik
 import com.egeuzma.proje.Controller.KaloriHesaplayici
 import com.egeuzma.proje.Controller.selectedItemsList
 import com.egeuzma.proje.Controller.toplamKalori
-import kotlinx.android.synthetic.main.activity_kalori_hesaplayici.view.*
-import kotlinx.android.synthetic.main.recycler_view_row.view.*
 import kotlin.math.round
-import android.content.res.Resources
-import com.google.rpc.context.AttributeContext
 
-import kotlinx.android.synthetic.main.activity_kalori_hesaplayici.*
-import kotlinx.android.synthetic.main.activity_urun_ekleme.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 class KaloriUrunAdapter (private val productName : ArrayList<String>,private val productUnitCal: ArrayList

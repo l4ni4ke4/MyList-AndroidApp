@@ -4,27 +4,16 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.text.Editable
 import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.egeuzma.proje.MalzemeAdapter
+import com.egeuzma.proje.adapter.MalzemeAdapter
 import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
 import com.egeuzma.proje.model.Database
-import com.egeuzma.proje.model.Liste
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_liste_icerik.*
-import kotlinx.android.synthetic.main.activity_urun_ekleme.*
-import kotlinx.android.synthetic.main.change_liste_ismi.*
 
 class ListeIcerik : AppCompatActivity() {
     private lateinit var  db : FirebaseFirestore
@@ -77,7 +66,13 @@ class ListeIcerik : AppCompatActivity() {
 
                 layoutManager = LinearLayoutManager(this@ListeIcerik)
                 recyclerView.layoutManager = layoutManager
-                adapter = MalzemeAdapter(productName,productNumber,productNote,selectedList!!,productCheck)
+                adapter = MalzemeAdapter(
+                    productName,
+                    productNumber,
+                    productNote,
+                    selectedList!!,
+                    productCheck
+                )
                 recyclerView.adapter = adapter
             }
 

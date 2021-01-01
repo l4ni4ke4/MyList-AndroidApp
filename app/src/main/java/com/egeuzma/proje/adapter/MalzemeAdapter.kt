@@ -1,24 +1,17 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.adapter
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.graphics.BlurMaskFilter
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.egeuzma.proje.Controller.ListeIcerik
-import com.egeuzma.proje.Controller.MainActivity
 import com.egeuzma.proje.Controller.UrunDetayi
+import com.egeuzma.proje.R
 import com.egeuzma.proje.model.Database
-import com.egeuzma.proje.model.Liste
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.urun_ekleme_dialog.*
 
 
 class MalzemeAdapter (private val productName : ArrayList<String>,private val productNumber : ArrayList<String>,private val productNote : ArrayList<String>,private val liste:String,private val productCheck : ArrayList<Boolean>):RecyclerView.Adapter<MalzemeAdapter.MalzemeHolder>(){

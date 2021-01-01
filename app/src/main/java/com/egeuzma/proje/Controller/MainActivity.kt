@@ -7,20 +7,15 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
-import com.egeuzma.proje.RecyclerAdapter
+import com.egeuzma.proje.adapter.RecyclerAdapter
 import com.egeuzma.proje.model.Database
 import com.egeuzma.proje.model.Liste
-import com.egeuzma.proje.model.YemekTarif
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_liste_icerik.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.change_liste_ismi.*
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 

@@ -1,17 +1,11 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.adapter
 
-import android.content.Intent
-import android.graphics.BlurMaskFilter
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.egeuzma.proje.Controller.KaloriHesaplayici
-import com.egeuzma.proje.Controller.ListeIcerik
-import com.egeuzma.proje.Controller.UrunDetayi
-import com.egeuzma.proje.model.Liste
+import com.egeuzma.proje.R
 
 class KalorieAdapter (private val kaloriNameArray :ArrayList<String>): RecyclerView.Adapter<KalorieAdapter.PostHolder>(){
     //, private val kaloriArray :ArrayList<Number>

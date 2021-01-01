@@ -1,4 +1,4 @@
-package com.egeuzma.proje
+package com.egeuzma.proje.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.egeuzma.proje.model.Liste
 import com.egeuzma.proje.Controller.ListeIcerik
+import com.egeuzma.proje.R
 
 class RecyclerAdapter(private val listname :ArrayList<Liste>): RecyclerView.Adapter<RecyclerAdapter.PostHolder>(){
 

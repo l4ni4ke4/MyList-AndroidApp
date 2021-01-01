@@ -1,20 +1,13 @@
 package com.egeuzma.proje.Controller
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.egeuzma.proje.MyCallBack
 import com.egeuzma.proje.R
-import com.egeuzma.proje.RecyclerAdapter
-import com.egeuzma.proje.TarifAdapter
+import com.egeuzma.proje.adapter.TarifAdapter
 import com.egeuzma.proje.model.Database
-import com.egeuzma.proje.model.Liste
 import com.egeuzma.proje.model.YemekTarif
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_yemek_tarifleri.*
 
 class YemekTarifleri : AppCompatActivity() {
