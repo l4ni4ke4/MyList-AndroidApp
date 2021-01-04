@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#77615151"
-    android:orientation="vertical"
-    android:paddingLeft="25dp">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/createListLayout"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#77615151"
+              android:orientation="vertical" android:paddingLeft="25dp">
 
     <TextView
         android:id="@+id/textView5"
@@ -19,7 +19,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/yeniListe"
         app:layout_constraintEnd_toEndOf="@+id/yeniListe"
-        app:layout_constraintStart_toStartOf="@+id/yeniListe" />
+        app:layout_constraintStart_toStartOf="@+id/yeniListe"/>
 
     <EditText
         android:id="@+id/yeniListe"
@@ -33,7 +33,7 @@
         android:textColorHint="#000000"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/button7"
@@ -42,6 +42,6 @@
         android:text="@string/kaydet_but"
         app:layout_constraintEnd_toEndOf="@+id/yeniListe"
         app:layout_constraintStart_toStartOf="@+id/yeniListe"
-        tools:layout_editor_absoluteY="295dp" />
+        tools:layout_editor_absoluteY="295dp"/>
 
 </LinearLayout>
